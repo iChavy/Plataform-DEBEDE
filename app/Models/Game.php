@@ -32,4 +32,12 @@ class Game extends Model
     public function gamegenre(){
         return $this->hasMany('App\Models\GameGenre');
     }
+
+    public function gametransaction(){
+        return $this->hasMany('App\Models\GameTransaction');
+    }
+
+    public function gender(){
+        return $this->belongsTo('App\Models\Gender');
+    }
 }

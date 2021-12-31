@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CoinPack extends Model
 {
     use HasFactory;
+
+    public function usercoin(){
+        return $this->hasMany('App\Models\UserCoin');
+    }
 }

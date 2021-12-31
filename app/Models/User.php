@@ -41,8 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    use HasFactory;
+    
 
     public function wishlist(){
         return $this->hasOne('App\Models\WishList');
@@ -67,5 +66,20 @@ class User extends Authenticatable
     public function followup2(){
         return $this->hasMany('App\Models\FollowUp');
     }
+
+    public function userpaymentmethod(){
+        return $this->hasMany('App\Models\UserPaymentMethod');
+    }
     
+    public function role(){
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function usercoin(){
+        return $this->hasMany('App\Models\UserCoin');
+    }
+
+    public function transaction(){
+        return $this->hasMany('App\Models\Transaction');
+    }
 }

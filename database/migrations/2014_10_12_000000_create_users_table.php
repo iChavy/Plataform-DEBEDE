@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('Correo_electronico', 100)->unique();
             $table->string('Contrasenya',20);
             $table->date('Fecha_Nacimiento');
-            $table->integer("Saldo_Moneda");
+            $table->integer('Saldo_Moneda');
             // $table->timestamp('email_verified_at')->nullable();
 
             $table->unsignedBigInteger('ID_Rol')->nullable();

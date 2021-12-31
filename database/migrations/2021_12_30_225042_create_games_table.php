@@ -21,7 +21,7 @@ class CreateGamesTable extends Migration
             $table->string("Link",200);
             
             $table->unsignedBigInteger('ID_Restriccion')->nullable();
-            $table->foreign('ID_Restriccion')->references('id')->on('age_restriccions');
+            $table->foreign('ID_Restriccion')->references('id')->on('age_restrictions');
 
             $table->timestamps();
         });

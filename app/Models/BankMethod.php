@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class BankMethod extends Model
 {
     use HasFactory;
+
+    public function bank(){
+        return $this->belongsTo('App\Models\Bank');
+    }
+
+    public function paymentmethod(){
+        return $this->belongsTo('App\Models\PaymentMethod');
+    }
 }
