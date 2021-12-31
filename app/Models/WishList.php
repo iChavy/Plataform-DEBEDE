@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class WishList extends Model
 {
     use HasFactory;
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function gamewishlist(){
+        return $this->hasMany('App\Models\WishList');
+    }
+    
 }

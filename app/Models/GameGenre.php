@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class GameGenre extends Model
 {
     use HasFactory;
+
+    public function game(){
+        return $this->belongsTo('App\Models\Game');
+    }
 }
