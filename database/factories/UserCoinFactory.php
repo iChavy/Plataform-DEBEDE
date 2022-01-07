@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\UserCoin;
 
-//use App\Models\User;
+use App\Models\User;
 use App\Models\CoinPack;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,7 +26,7 @@ class UserCoinFactory extends Factory
     public function definition()
     {
         return [
-            //'ID_Usuario' => User::all()->random()->id,
+            'ID_Usuario' => User::all()->random()->id,
             'ID_paquete' => CoinPack::all()->random()->id
         ];
     }

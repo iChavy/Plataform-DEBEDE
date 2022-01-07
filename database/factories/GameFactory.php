@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Game;
 
-//use App\Models\User;
+use App\Models\User;
 use App\Models\AgeRestriction;
 
 
@@ -32,7 +32,7 @@ class GameFactory extends Factory
             'Precio' => $this->faker->numberBetween($min = 5000, $max = 70000),
             'Link' => $this->faker->unique()->url,
             'Link_Demo' => $this->faker->unique()->url,
-            //'ID_Usuario' => User::all()->random()->id,
+            'ID_Usuario' => User::all()->random()->id,
             'ID_Restriccion' => AgeRestriction::all()->random()->id
 
         ];

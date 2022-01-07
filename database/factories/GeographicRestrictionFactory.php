@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\GeographicRestriction;
 
-//use App\Models\Country;
+use App\Models\Country;
 use App\Models\Game;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,7 +26,7 @@ class GeographicRestrictionFactory extends Factory
     public function definition()
     {
         return [
-            //'ID_Pais' => Country::all()->random()->id,
+            'ID_Pais' => Country::all()->random()->id,
             'Codigo_Juego' => Game::all()->random()->id
         ];
     }

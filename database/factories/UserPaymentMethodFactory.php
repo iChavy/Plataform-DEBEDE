@@ -2,20 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
-
+use App\Models\UserPaymentMethod;
+use App\Models\PaymentMethod;
 use App\Models\User;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TransactionFactory extends Factory
+class UserPaymentMethodFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Transaction::class;
+    protected $model = UserPaymentMethod::class;
 
     /**
      * Define the model's default state.
@@ -25,9 +24,9 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            'ID_Usuario' => User::all()->random()->id,            
-            'Fecha' => $this->faker->dateTime($max = 'now')
-
+            'Fecha' => $this->faker->dateTime($max = 'now'),
+            'ID_Metodo' => PaymentMethod::all()->random()->id,
+            'ID_Usuario' => User::all()->random()->id
         ];
     }
 }

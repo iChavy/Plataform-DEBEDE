@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Valuation;
 
-//use App\Models\User;
+use App\Models\User;
 use App\Models\Game;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,7 +26,7 @@ class ValuationFactory extends Factory
     public function definition()
     {
         return [
-            //'ID_Usuario' => User::all()->random()->id,
+            'ID_Usuario' => User::all()->random()->id,
             'Codigo_Juego' => Game::all()->random()->id,
             'Comentario' => $this->faker->text($maxNbChars = 500),
             'Like' => $this->faker->boolean

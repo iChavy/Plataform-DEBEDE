@@ -22,7 +22,7 @@ class CoinPackFactory extends Factory
     public function definition()
     {
         return [
-            'Cantidad' => $this->faker->numberBetween($min = 0, $max = 100000),
+            'Cantidad' => $this->faker->numberBetween($min = 0, $max = 100000)
         ];
     }
 }
