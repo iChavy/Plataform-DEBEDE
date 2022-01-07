@@ -37,7 +37,7 @@ class Game extends Model
         return $this->hasMany('App\Models\GameTransaction');
     }
 
-    public function gender(){
-        return $this->belongsTo('App\Models\Gender');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 }

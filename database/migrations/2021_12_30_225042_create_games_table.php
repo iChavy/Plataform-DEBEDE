@@ -19,10 +19,11 @@ class CreateGamesTable extends Migration
             $table->integer("Numero_Ventas");
             $table->integer("Precio");
             $table->string("Link",200);
-            
+            $table->string("Link_Demo",200);
             $table->unsignedBigInteger('ID_Restriccion')->nullable();
             $table->foreign('ID_Restriccion')->references('id')->on('age_restrictions');
-
+            $table->unsignedBigInteger('ID_Usuario')->nullable();
+            $table->foreign('ID_Usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }

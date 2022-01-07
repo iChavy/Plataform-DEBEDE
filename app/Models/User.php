@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function transaction(){
         return $this->hasMany('App\Models\Transaction');
     }
+
+    public function game(){
+        return $this->hasMany('App\Models\Game');
+    }
 }
