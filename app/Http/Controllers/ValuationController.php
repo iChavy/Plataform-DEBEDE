@@ -142,9 +142,9 @@ class ValuationController extends Controller
         }
 
         if (($request->ID_Usuario == $valuation->ID_Usuario)|
-        ($request->Codigo_Juego == $valuation->Codigo_Juego)|
-        ($request->Comentario == $valuation->Comentario)|
-        ($request->Like == $valuation->Like)){
+            ($request->Codigo_Juego == $valuation->Codigo_Juego)|
+            ($request->Comentario == $valuation->Comentario)|
+            ($request->Like == $valuation->Like)){
             return response()->json([
                 "message" => "Los datos ingresados son iguales a los actuales."
             ], 404);
