@@ -148,3 +148,17 @@ Route::get('/valuation/{id}','ValuationController@show');
 Route::post('/valuation/create','ValuationController@store');
 Route::put('/valuation/update/{id}','ValuationController@update');
 Route::delete('/valuation/delete/{id}','ValuationController@destroy');
+
+// Transaction
+Route::get('/transactions','TransactionController@index');
+Route::get('/transaction/{id}','TransactionController@show');
+Route::post('/transaction/create','TransactionController@store');
+Route::put('/transaction/update/{id}','TransactionController@update');
+Route::delete('/transaction/delete/{id}','TransactionController@destroy');
+
+// UserPaymentMethod
+Route::get('/userpaymentmethods','UserPaymentMethodController@index');
+Route::get('/userpaymentmethod/{id}','UserPaymentMethodController@show');
+Route::post('/userpaymentmethod/create','UserPaymentMethodController@store');
+Route::put('/userpaymentmethod/update/{id}','UserPaymentMethodController@update');
+Route::delete('/userpaymentmethod/delete/{id}','UserPaymentMethodController@destroy');
