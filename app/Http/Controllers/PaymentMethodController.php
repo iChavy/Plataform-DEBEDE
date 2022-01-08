@@ -80,7 +80,7 @@ class PaymentMethodController extends Controller
     {
         $paymentmethod = PaymentMethod::find($id);
         if(empty($paymentmethod)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($paymentmethod, 200);
     }
@@ -108,14 +108,12 @@ class PaymentMethodController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:2|max:100',
-                'Nro_tarjeta' => 'required|integer',
+                'Nombre' => 'nullable|min:2|max:100',
+                'Nro_tarjeta' => 'nullable|integer',
             ],
             [
-                'Nombre.required' => 'Se debe ingresar el nombre del método de pago.',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
-                'Nro_tarjeta.required' => 'Se debe ingresar el número de tarjeta del método de pago.',
                 'Nro_tarjeta.min' => 'Debe ser un entero.',
             ]
         );
@@ -125,7 +123,7 @@ class PaymentMethodController extends Controller
         }
         $paymentmethod = PaymentMethod::find($id);
         if(empty($paymentmethod)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         if ($request->Nombre == $paymentmethod->Nombre && $request->Nro_tarjeta == $paymentmethod->Nro_tarjeta){
             return response()->json([
@@ -139,6 +137,22 @@ class PaymentMethodController extends Controller
             $paymentmethod->Nro_tarjeta = $request->Nro_tarjeta;
         }
         $paymentmethod->save();
+
+        if (!empty($request->Nombre && $request->Nro_tarjeta)){
+            return response()->json([
+                'msg' => 'El método de pago ha sido modificado.',
+                'id' => $paymentmethod->id,
+            ], 200);       
+        }
+
+         
+        if (!empty($request->Nombre)){
+            return response()->json(['mensaje' => 'El nombre de la tarjeta ha sido actualizado',
+            'id' => $paymentmethod->id,],200);
+        }
+
+        return response()->json(['mensaje' => 'El número de la tarjeta ha sido actualizado',
+        'id' => $paymentmethod->id,],200);
     }
 
     /**
@@ -151,7 +165,7 @@ class PaymentMethodController extends Controller
     {
         $paymentmethod = PaymentMethod::find($id);
         if(empty($paymentmethod)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $paymentmethod->delete();
         return response()->json([

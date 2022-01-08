@@ -75,7 +75,7 @@ class CoinPackController extends Controller
     {
         $coinpack = CoinPack::find($id);
         if(empty($coinpack)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($coinpack, 200);
     }
@@ -116,9 +116,13 @@ class CoinPackController extends Controller
         }
         $coinpack = CoinPack::find($id);
         if(empty($coinpack)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
-
+        if ($request->Cantidad == $coinpack->Cantidad){
+            return response()->json([
+                "message" => "Los datos ingresados son iguales a los actuales."
+            ], 404);
+        }
         $coinpack->Cantidad = $request->Cantidad;
         $coinpack->save();
         return response()->json([
@@ -137,7 +141,7 @@ class CoinPackController extends Controller
     {
         $coinpack = CoinPack::find($id);
         if(empty($coinpack)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $coinpack->delete();
         return response()->json([

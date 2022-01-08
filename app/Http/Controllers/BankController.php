@@ -78,7 +78,7 @@ class BankController extends Controller
     {
         $bank = Bank::find($id);
         if(empty($bank)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($bank, 200);
     }
@@ -120,9 +120,13 @@ class BankController extends Controller
         }
         $bank = Bank::find($id);
         if(empty($bank)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
-
+        if ($request->Nombre == $bank->Nombre){
+            return response()->json([
+                "message" => "Los datos ingresados son iguales a los actuales."
+            ], 404);
+        }
         $bank->Nombre = $request->Nombre;
         $bank->save();
         return response()->json([
@@ -142,7 +146,7 @@ class BankController extends Controller
     {
         $bank = Bank::find($id);
         if(empty($bank)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $bank->delete();
         return response()->json([

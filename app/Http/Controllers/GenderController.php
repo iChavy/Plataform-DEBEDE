@@ -78,7 +78,7 @@ class GenderController extends Controller
     {
         $gender = Gender::find($id);
         if(empty($gender)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($gender, 200);
     }
@@ -120,9 +120,13 @@ class GenderController extends Controller
         }
         $gender = Gender::find($id);
         if(empty($gender)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
-
+        if ($request->Tipo_genero == $gender->Tipo_genero){
+            return response()->json([
+                "message" => "Los datos ingresados son iguales a los actuales."
+            ], 404);
+        }
         $gender->Tipo_genero = $request->Tipo_genero;
         $gender->save();
         return response()->json([
@@ -141,7 +145,7 @@ class GenderController extends Controller
     {
         $gender = Gender::find($id);
         if(empty($gender)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $gender->delete();
         return response()->json([
