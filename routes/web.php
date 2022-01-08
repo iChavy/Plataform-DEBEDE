@@ -134,3 +134,17 @@ Route::get('/followup/{id}','FollowUpController@show');
 Route::post('/followup/create','FollowUpController@store');
 Route::put('/followup/update/{id}','FollowUpController@update');
 Route::delete('/followup/delete/{id}','FollowUpController@destroy');
+
+// WishList
+Route::get('/wishlists','WishListController@index');
+Route::get('/wishlist/{id}','WishListController@show');
+Route::post('/wishlist/create','WishListController@store');
+Route::put('/wishlist/update/{id}','WishListController@update');
+Route::delete('/wishlist/delete/{id}','WishListController@destroy');
+
+// Valuation
+Route::get('/valuations','ValuationController@index');
+Route::get('/valuation/{id}','ValuationController@show');
+Route::post('/valuation/create','ValuationController@store');
+Route::put('/valuation/update/{id}','ValuationController@update');
+Route::delete('/valuation/delete/{id}','ValuationController@destroy');
