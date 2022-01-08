@@ -85,7 +85,7 @@ class FunctionalityController extends Controller
     {
         $functionality = Functionality::find($id);
         if(empty($functionality)){
-            return response()->json([]);
+            return response()->json(['mensaje' => 'El id ingresado no existe']);
         }
 
         return response($functionality, 200);
@@ -114,15 +114,13 @@ class FunctionalityController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:4|max:100',
-                'Descripcion' => 'required|min:10|max:200',
+                'Nombre' => 'nullable|min:4|max:100',
+                'Descripcion' => 'nullable|min:10|max:200',
             ],
             [
-                'Nombre.required' => 'Se debe ingresar el nombre de la funcionalidad',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
 
-                'Descripcion.required' => 'Se debe ingresar la descripción de la funcionalidad',
                 'Descripcion.min' => 'Debe ser de largo mínimo :min',
                 'Descripcion.max' => 'Debe ser de largo máximo :max',
             ]
@@ -134,12 +132,12 @@ class FunctionalityController extends Controller
 
         $functionality = Functionality::find($id);
         if(empty($functionality)){
-            return response()->json(['No se encuentra el id ingresado']);
+            return response()->json(['mensaje' => 'El id ingresado no existe']);
         }
 
-        if ($request->Nombre == $functionality->Nombre && $request->Descripcion == $functionality->Descripcion){
+        if (($request->Nombre == $functionality->Nombre && $request->Descripcion == $functionality->Descripcion)|($request->Nombre == $functionality->Nombre)|($request->Descripcion == $functionality->Descripcion)){
             return response()->json([
-                "message" => "Los datos ingresados son iguales a los actuales."
+                "mensaje" => "Los datos ingresados son iguales a los actuales."
             ], 404);
         }
 
@@ -153,10 +151,20 @@ class FunctionalityController extends Controller
         
         $functionality->save();
 
-        return response()->json([
-            'mensaje' => 'El nombre del rol ha sido actualizado',
-            'id' => $functionality->id,
-        ], 200);
+        if (!empty($request->Nombre && $request->Descripcion)){
+            return response()->json([
+                'mensaje' => 'La funcionalidad ha sido modificado.',
+                'id' => $functionality->id,
+            ], 200);       
+        }
+
+        if (!empty($request->Nombre)){
+            return response()->json(['mensaje' => 'El nombre de la funcionalidad ha sido actualizado',
+            'id' => $functionality->id,],200);
+        }
+
+        return response()->json(['mensaje' => 'La descripción de la funcionalidad ha sido actualizado',
+            'id' => $functionality->id,],200);        
         
     }
 
@@ -170,11 +178,11 @@ class FunctionalityController extends Controller
     {
         $functionality = Functionality::find($id);
         if(empty($functionality)){
-            return response()->json(['El id ingresado no existe']);
+            return response()->json(['mensaje' => 'El id ingresado no existe']);
         }
         $functionality->delete();
         return response()->json([
-            'mensaje' => 'La funcionalidad ha sido eliminado',
+            'mensaje' => 'La funcionalidad ha sido eliminada',
             'id' => $functionality->id,
         ], 200);
         

@@ -44,25 +44,28 @@ Route::post('/paymentmethod/create','PaymentMethodController@store');
 Route::put('/paymentmethod/update/{id}','PaymentMethodController@update');
 Route::delete('/paymentmethod/delete/{id}','PaymentMethodController@destroy');
 
-// 
+// AgeRestriction
 Route::get('/agerestrictions','AgeRestrictionController@index');
 Route::get('/agerestriction/{id}','AgeRestrictionController@show');
 Route::post('/agerestriction/create','AgeRestrictionController@store');
 Route::put('/agerestriction/update/{id}','AgeRestrictionController@update');
 Route::delete('/agerestriction/delete/{id}','AgeRestrictionController@destroy');
 
+// Country
 Route::get('/countries','CountryController@index');
 Route::get('/country/{id}','CountryController@show');
 Route::post('/country/create','CountryController@store');
 Route::put('/country/update/{id}','CountryController@update');
 Route::delete('/country/delete/{id}','CountryController@destroy');
 
+// Role
 Route::get('/roles','RoleController@index');
 Route::get('/role/{id}','RoleController@show');
 Route::post('/role/create','RoleController@store');
 Route::put('/role/update/{id}','RoleController@update');
 Route::delete('/role/delete/{id}','RoleController@destroy');
 
+// Functionality
 Route::get('/functionalities','FunctionalityController@index');
 Route::get('/functionality/{id}','FunctionalityController@show');
 Route::post('/functionality/create','FunctionalityController@store');
@@ -104,3 +107,30 @@ Route::post('/geographicrestriction/create','GeographicRestrictionController@sto
 Route::put('/geographicrestriction/update/{id}','GeographicRestrictionController@update');
 Route::delete('/geographicrestriction/delete/{id}','GeographicRestrictionController@destroy');
 
+// BankMethod
+Route::get('/bankmethods','BankMethodController@index');
+Route::get('/bankmethod/{id}','BankMethodController@show');
+Route::post('/bankmethod/create','BankMethodController@store');
+Route::put('/bankmethod/update/{id}','BankMethodController@update');
+Route::delete('/bankmethod/delete/{id}','BankMethodController@destroy');
+
+// RoleFunctionality
+Route::get('/rolefunctionalities','RoleFunctionalityController@index');
+Route::get('/rolefunctionality/{id}','RoleFunctionalityController@show');
+Route::post('/rolefunctionality/create','RoleFunctionalityController@store');
+Route::put('/rolefunctionality/update/{id}','RoleFunctionalityController@update');
+Route::delete('/rolefunctionality/delete/{id}','RoleFunctionalityController@destroy');
+
+// UserCoin
+Route::get('/usercoins','UserCoinController@index');
+Route::get('/usercoin/{id}','UserCoinController@show');
+Route::post('/usercoin/create','UserCoinController@store');
+Route::put('/usercoin/update/{id}','UserCoinController@update');
+Route::delete('/usercoin/delete/{id}','UserCoinController@destroy');
+
+// FollowUp
+Route::get('/followups','FollowUpController@index');
+Route::get('/followup/{id}','FollowUpController@show');
+Route::post('/followup/create','FollowUpController@store');
+Route::put('/followup/update/{id}','FollowUpController@update');
+Route::delete('/followup/delete/{id}','FollowUpController@destroy');
