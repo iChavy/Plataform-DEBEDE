@@ -68,3 +68,39 @@ Route::get('/functionality/{id}','FunctionalityController@show');
 Route::post('/functionality/create','FunctionalityController@store');
 Route::put('/functionality/update/{id}','FunctionalityController@update');
 Route::delete('/functionality/delete/{id}','FunctionalityController@destroy');
+
+// GameGenre
+Route::get('/gamegenres','GameGenreController@index');
+Route::get('/gamegenre/{id}','GameGenreController@show');
+Route::post('/gamegenre/create','GameGenreController@store');
+Route::put('/gamegenre/update/{id}','GameGenreController@update');
+Route::delete('/gamegenre/delete/{id}','GameGenreController@destroy');
+
+// GameTransaction
+Route::get('/gametransactions','GameTransactionController@index');
+Route::get('/gametransaction/{id}','GameTransactionController@show');
+Route::post('/gametransaction/create','GameTransactionController@store');
+Route::put('/gametransaction/update/{id}','GameTransactionController@update');
+Route::delete('/gametransaction/delete/{id}','GameTransactionController@destroy');
+
+// Library
+Route::get('/libraries','LibraryController@index');
+Route::get('/library/{id}','LibraryController@show');
+Route::post('/library/create','LibraryController@store');
+Route::put('/library/update/{id}','LibraryController@update');
+Route::delete('/library/delete/{id}','LibraryController@destroy');
+
+// GameWishList
+Route::get('/gamewishlists','GameWishListController@index');
+Route::get('/gamewishlist/{id}','GameWishListController@show');
+Route::post('/gamewishlist/create','GameWishListController@store');
+Route::put('/gamewishlist/update/{id}','GameWishListController@update');
+Route::delete('/gamewishlist/delete/{id}','GameWishListController@destroy');
+
+// GeographicRestriction
+Route::get('/geographicrestrictions','GeographicRestrictionController@index');
+Route::get('/geographicrestriction/{id}','GeographicRestrictionController@show');
+Route::post('/geographicrestriction/create','GeographicRestrictionController@store');
+Route::put('/geographicrestriction/update/{id}','GeographicRestrictionController@update');
+Route::delete('/geographicrestriction/delete/{id}','GeographicRestrictionController@destroy');
+

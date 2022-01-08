@@ -125,7 +125,7 @@ class PaymentMethodController extends Controller
         if(empty($paymentmethod)){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
-        if ($request->Nombre == $paymentmethod->Nombre && $request->Nro_tarjeta == $paymentmethod->Nro_tarjeta){
+        if (($request->Nombre == $paymentmethod->Nombre && $request->Nro_tarjeta == $paymentmethod->Nro_tarjeta)|($request->Nombre == $paymentmethod->Nombre)|($request->Nro_tarjeta == $paymentmethod->Nro_tarjeta)){
             return response()->json([
                 "message" => "Los datos ingresados son iguales a los actuales."
             ], 404);
@@ -144,8 +144,7 @@ class PaymentMethodController extends Controller
                 'id' => $paymentmethod->id,
             ], 200);       
         }
-
-         
+      
         if (!empty($request->Nombre)){
             return response()->json(['mensaje' => 'El nombre de la tarjeta ha sido actualizado',
             'id' => $paymentmethod->id,],200);
