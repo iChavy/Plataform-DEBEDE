@@ -22,8 +22,8 @@ class PaymentMethodFactory extends Factory
     public function definition()
     {
         return [
-            'Nombre' => $this->faker->creditCardType
-            //'Nro_tarjeta' => $this->faker->
+            'Nombre' => $this->faker->creditCardType,
+            'Nro_tarjeta' => $this->faker->creditCardNumber 
         ];
     }
 }
