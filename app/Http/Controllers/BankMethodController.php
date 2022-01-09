@@ -16,7 +16,7 @@ class BankMethodController extends Controller
      */
     public function index()
     {
-        $bankmethods = BankMethod::all();
+        $bankmethods = BankMethod::where('borrado',false)->get();
         if($bankmethods->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran métodos del banco']);
@@ -67,6 +67,7 @@ class BankMethodController extends Controller
         $newBankMethod = new BankMethod();
         $newBankMethod->ID_Banco = $request->ID_Banco;
         $newBankMethod->ID_Metodo = $request->ID_Metodo;
+        $newBankMethod->borrado = false;
         $newBankMethod->save();
 
         return response()->json([
@@ -85,7 +86,7 @@ class BankMethodController extends Controller
     public function show($id) 
     {
         $bankmethod = BankMethod::find($id);
-        if(empty($bankmethod)){
+        if(empty($bankmethod) or $bankmethod->borrado == true){
             return response()->json(['mensaje' => 'El id ingresado no existe']);
         }
 
@@ -169,12 +170,20 @@ class BankMethodController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $bankmethod = BankMethod::find($id);
+        if(empty($bankmethod) or $bankmethod->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $bankmethod->borrado = true;
+        $bankmethod->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $bankmethod->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $bankmethod = BankMethod::find($id);

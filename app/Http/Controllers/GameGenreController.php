@@ -15,7 +15,7 @@ class GameGenreController extends Controller
      */
     public function index()
     {
-        $gamegenres = GameGenre::all();
+        $gamegenres = GameGenre::where('borrado',false)->get();
         if($gamegenres->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran juegos con tipo de género.']);
@@ -63,6 +63,7 @@ class GameGenreController extends Controller
         $newGameGenre = new GameGenre();
         $newGameGenre->ID_genero = $request->ID_genero;
         $newGameGenre->Codigo_Juego = $request->Codigo_Juego;
+        $newGameGenre->borrado = false;
         $newGameGenre->save();
 
         return response()->json([
@@ -80,7 +81,7 @@ class GameGenreController extends Controller
     public function show($id)
     {
         $gamegenre = GameGenre::find($id);
-        if(empty($gamegenre)){
+        if(empty($gamegenre) or $gamegenre->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($gamegenre, 200);
@@ -158,12 +159,20 @@ class GameGenreController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $gamegenre = GameGenre::find($id);
+        if(empty($gamegenre) or $gamegenre->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $gamegenre->borrado = true;
+        $gamegenre->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $gamegenre->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $gamegenre = GameGenre::find($id);

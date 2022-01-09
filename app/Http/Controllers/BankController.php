@@ -16,7 +16,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
+        $banks = Bank::where('borrado',false)->get();
         if($banks->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran bancos.']);
@@ -60,6 +60,7 @@ class BankController extends Controller
         }
         $newBank = new Bank();
         $newBank->Nombre = $request->Nombre;
+        $newBank->borrado = false;
         $newBank->save();
 
         return response()->json([
@@ -78,7 +79,7 @@ class BankController extends Controller
     public function show($id)
     {
         $bank = Bank::find($id);
-        if(empty($bank)){
+        if(empty($bank) or $bank->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($bank, 200);
@@ -138,12 +139,20 @@ class BankController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $bank = Bank::find($id);
+        if(empty($bank) or $bank->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $bank->borrado = true;
+        $bank->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $bank->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $bank = Bank::find($id);

@@ -17,6 +17,7 @@ class CreateCountriesTable extends Migration
             $table->id();
 
             $table->string('Nombre', 60);
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

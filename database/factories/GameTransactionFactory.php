@@ -27,7 +27,8 @@ class GameTransactionFactory extends Factory
     {
         return [
             'Codigo_Juego' => Game::all()->random()->id, 
-            'ID_Transaccion' => Transaction::all()->random()->id
+            'ID_Transaccion' => Transaction::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

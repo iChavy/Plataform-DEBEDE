@@ -27,7 +27,8 @@ class GameGenreFactory extends Factory
     {
         return [
             'ID_genero' => Gender::all()->random()->id,
-            'Codigo_Juego' => Game::all()->random()->id
+            'Codigo_Juego' => Game::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

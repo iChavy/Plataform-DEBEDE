@@ -16,6 +16,7 @@ class CreateCoinPacksTable extends Migration
         Schema::create('coin_packs', function (Blueprint $table) {
             $table->id();
             $table->integer("Cantidad");
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class CreateFollowUpsTable extends Migration
 
             $table->unsignedBigInteger('ID_Usuario2')->nullable();
             $table->foreign('ID_Usuario2')->references('id')->on('users');
-
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

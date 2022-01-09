@@ -15,7 +15,7 @@ class CoinPackController extends Controller
      */
     public function index()
     {
-        $coinpacks = CoinPack::all();
+        $coinpacks = CoinPack::where('borrado',false)->get();
         if($coinpacks->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran paquetes de monedas.']);
@@ -57,6 +57,7 @@ class CoinPackController extends Controller
         }
         $newCoinPack = new CoinPack();
         $newCoinPack->Cantidad = $request->Cantidad;
+        $newCoinPack->borrado = false;
         $newCoinPack->save();
 
         return response()->json([
@@ -74,7 +75,7 @@ class CoinPackController extends Controller
     public function show($id)
     {
         $coinpack = CoinPack::find($id);
-        if(empty($coinpack)){
+        if(empty($coinpack) or $coinpack->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($coinpack, 200);
@@ -131,12 +132,20 @@ class CoinPackController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $coinpack = CoinPack::find($id);
+        if(empty($coinpack) or $coinpack->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $coinpack->borrado = true;
+        $coinpack->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $coinpack->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $coinpack = CoinPack::find($id);

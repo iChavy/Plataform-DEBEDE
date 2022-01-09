@@ -25,7 +25,8 @@ class BankMethodFactory extends Factory
     {
         return [
             'ID_Banco' => Bank::all()->random()->id,
-            'ID_Metodo' => PaymentMethod::all()->random()->id
+            'ID_Metodo' => PaymentMethod::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

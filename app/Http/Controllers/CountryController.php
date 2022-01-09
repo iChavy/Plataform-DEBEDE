@@ -16,7 +16,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
+        $countries = Country::where('borrado',false)->get();
         if($countries->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran paises']);
@@ -61,6 +61,7 @@ class CountryController extends Controller
 
         $newCountry = new Country();
         $newCountry->Nombre = $request->Nombre;
+        $newCountry->borrado = false;
         $newCountry->save();
 
         return response()->json([
@@ -79,7 +80,7 @@ class CountryController extends Controller
     public function show($id)
     {
         $country = Country::find($id);
-        if(empty($country)){
+        if(empty($country) or $country->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
 
@@ -143,12 +144,20 @@ class CountryController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $country = Country::find($id);
+        if(empty($country) or $country->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $country->borrado = true;
+        $country->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $country->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $country = Country::find($id);

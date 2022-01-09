@@ -16,7 +16,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        $games = Game::where('borrado',false)->get();
         if($games->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran juegos']);
@@ -88,6 +88,7 @@ class GameController extends Controller
         $newGame->Precio = $request->Precio;
         $newGame->Link = $request->Link;
         $newGame->Link_Demo = $request->Link_Demo;
+        $newGame->borrado = false;
         $newGame->save();
 
         return response()->json([
@@ -106,7 +107,7 @@ class GameController extends Controller
     public function show($id) 
     {
         $game = Game::find($id);
-        if(empty($game)){
+        if(empty($game) or $game->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -213,12 +214,20 @@ class GameController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $game = Game::find($id);
+        if(empty($game) or $game->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $game->borrado = true;
+        $game->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $game->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $game = Game::find($id);

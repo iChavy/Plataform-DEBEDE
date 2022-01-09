@@ -16,13 +16,15 @@ class AgeRestrictionController extends Controller
      */
     public function index()
     {
-        $agerestrictions = AgeRestriction::all();
+        $agerestrictions = AgeRestriction::where('borrado',false)->get();
         if($agerestrictions->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran restricciones de edad']);
         }
         return response($agerestrictions, 200);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,6 +63,7 @@ class AgeRestrictionController extends Controller
 
         $newAgeRestriction = new AgeRestriction();
         $newAgeRestriction->Tipo_restriccion = $request->Tipo_restriccion;
+        $newAgeRestriction->borrado = false;
         $newAgeRestriction->save();
 
         return response()->json([
@@ -79,7 +82,7 @@ class AgeRestrictionController extends Controller
     public function show($id)
     {
         $agerestriction = AgeRestriction::find($id);
-        if(empty($agerestriction)){
+        if(empty($agerestriction) or $agerestriction->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
 
@@ -143,12 +146,20 @@ class AgeRestrictionController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $agerestriction = agerestriction::find($id);
+        if(empty($agerestriction) or $agerestriction->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $agerestriction->borrado = true;
+        $agerestriction->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $agerestriction->id,
+        ], 200);
+    }
+
     public function destroy($id)
     {
         $agerestriction = AgeRestriction::find($id);

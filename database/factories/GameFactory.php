@@ -33,7 +33,8 @@ class GameFactory extends Factory
             'Link' => $this->faker->unique()->url,
             'Link_Demo' => $this->faker->unique()->url,
             'ID_Usuario' => User::all()->random()->id,
-            'ID_Restriccion' => AgeRestriction::all()->random()->id
+            'ID_Restriccion' => AgeRestriction::all()->random()->id,
+            'borrado' => $this->faker->boolean
 
         ];
     }

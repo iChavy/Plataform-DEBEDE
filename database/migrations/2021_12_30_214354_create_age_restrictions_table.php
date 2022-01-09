@@ -17,6 +17,7 @@ class CreateAgeRestrictionsTable extends Migration
             $table->id();
 
             $table->string('Tipo_restriccion', 40);
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

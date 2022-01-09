@@ -15,7 +15,7 @@ class ValuationController extends Controller
      */
     public function index()
     {
-        $valuations = Valuation::all();
+        $valuations = Valuation::where('borrado',false)->get();
         if($valuations->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran valoraciones.']);
@@ -70,6 +70,7 @@ class ValuationController extends Controller
         $newValuation->Codigo_Juego = $request->Codigo_Juego;
         $newValuation->Comentario = $request->Comentario;
         $newValuation->Like = $request->Like;
+        $newValuation->borrado = false;
         $newValuation->save();
 
         return response()->json([
@@ -87,9 +88,10 @@ class ValuationController extends Controller
     public function show($id)
     {
         $valuation = Valuation::find($id);
-        if(empty($valuation)){
+        if(empty($valuation) or $valuation->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
+
 
         return response($valuation, 200);
     }
@@ -115,7 +117,7 @@ class ValuationController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make(
-            $request->only(['Tipo_restriccion']),
+            $request->all(),
             [
                 'ID_Usuario' => 'nullable|integer|exists:users,id',
                 'Codigo_Juego' => 'nullable|integer|exists:games,id',
@@ -168,12 +170,20 @@ class ValuationController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $valuation = Valuation::find($id);
+        if(empty($valuation) or $valuation->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $valuation->borrado = true;
+        $valuation->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $valuation->id,
+        ], 200);
+    }
+
     public function destroy($id)
     {
         $valuation = Valuation::find($id);
