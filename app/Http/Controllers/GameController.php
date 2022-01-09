@@ -46,6 +46,7 @@ class GameController extends Controller
             $request->all(),
             [
                 'ID_Restriccion' => 'required|integer|exists:age_restrictions,id',
+                'ID_Usuario' => 'nullable|integer|exists:users,id',
                 'Nombre' => 'required|min:2|max:100|unique:games',
                 'Precio' => 'required|integer|min:5000|max:70000',
                 'Link' => 'required|url|unique:games',
@@ -55,6 +56,10 @@ class GameController extends Controller
                 'ID_Restriccion.required' => 'Se debe ingresar el ID de la restricción',
                 'ID_Restriccion.integer' => 'Debe ser un entero',
                 'ID_Restriccion.exists' => 'El ID del método ingresado no existe',
+
+                'ID_Usuario.required' => 'Se debe ingresar el ID del usuario',
+                'ID_Usuario.integer' => 'Debe ser un entero',
+                'ID_Usuario.exists' => 'El ID de usuario ingresado no existe',
 
                 'Nombre.unique' => 'El juego ya existe',
                 'Nombre.required' => 'Se debe ingresar el nombre del juego',
@@ -83,6 +88,7 @@ class GameController extends Controller
 
         $newGame = new Game();
         $newGame->ID_Restriccion = $request->ID_Restriccion;
+        $newGame->ID_Usuario = $request->ID_Usuario;
         $newGame->Nombre = $request->Nombre;
         $newGame->Numero_Ventas = 0;
         $newGame->Precio = $request->Precio;
@@ -138,6 +144,7 @@ class GameController extends Controller
             $request->all(),
             [
                 'ID_Restriccion' => 'nullable|integer|exists:age_restrictions,id',
+                'ID_Usuario' => 'nullable|integer|exists:users,id',
                 'Nombre' => 'nullable|min:2|max:100|unique:games',
                 'Numero_Ventas' => 'nullable|integer',
                 'Precio' => 'nullable|integer|min:5000|max:70000',
@@ -145,6 +152,9 @@ class GameController extends Controller
                 'Link_Demo' => 'nullable|url|unique:games',
             ],
             [
+                'ID_Usuario.integer' => 'Debe ser un entero',
+                'ID_Usuario.exists' => 'El ID de usuario ingresado no existe',
+
                 'ID_Restriccion.integer' => 'Debe ser un entero',
                 'ID_Restriccion.exists' => 'El ID del método ingresado no existe',
 
@@ -178,6 +188,7 @@ class GameController extends Controller
         }
 
         if (($request->ID_Restriccion == $game->ID_Restriccion)|
+            ($request->ID_Usuario == $game->ID_Usuario)|
             ($request->Nombre == $game->Nombre)|
             ($request->Numero_Ventas == $game->Numero_Ventas)|
             ($request->Precio == $game->Precio)|
@@ -190,6 +201,9 @@ class GameController extends Controller
 
         if (!empty($request->ID_Restriccion)){
             $game->ID_Restriccion = $request->ID_Restriccion;
+        }
+        if (!empty($request->ID_Usuario)){
+            $game->ID_Usuario = $request->ID_Usuario;
         }
         if (!empty($request->Nombre)){
             $game->Nombre = $request->Nombre;
@@ -223,7 +237,7 @@ class GameController extends Controller
         $game->borrado = true;
         $game->save();
         return response()->json([
-            'msg' => 'La valoración ha sido eliminada (soft)',
+            'msg' => 'El juego ha sido eliminado (soft)',
             'id' => $game->id,
         ], 200);
     }

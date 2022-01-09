@@ -22,6 +22,8 @@ class CreateRoleFunctionalitiesTable extends Migration
             $table->unsignedBigInteger('ID_Rol')->nullable();
             $table->foreign('ID_Rol')->references('id')->on('roles');
 
+            $table->boolean("borrado");
+
             $table->timestamps();
         });
     }

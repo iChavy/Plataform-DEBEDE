@@ -27,7 +27,8 @@ class LibraryFactory extends Factory
     {
         return [
             'ID_Usuario' => User::all()->random()->id,
-            'Codigo_Juego' => Game::all()->random()->id
+            'Codigo_Juego' => Game::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

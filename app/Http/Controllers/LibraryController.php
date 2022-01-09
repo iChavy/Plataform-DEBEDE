@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller; 
 
 use App\Models\Library;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        $libraries = Library::all();
+        $libraries = Library::where('borrado',false)->get();
         if($libraries->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran bibliotecas.']);
@@ -63,6 +64,7 @@ class LibraryController extends Controller
         $newLibrary = new Library();
         $newLibrary->ID_Usuario = $request->ID_Usuario;
         $newLibrary->Codigo_Juego = $request->Codigo_Juego;
+        $newLibrary->borrado = false;
         $newLibrary->save();
 
         return response()->json([
@@ -80,7 +82,7 @@ class LibraryController extends Controller
     public function show($id)
     {
         $library = Library::find($id);
-        if(empty($library)){
+        if(empty($library) or $library->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($library, 200);
@@ -155,6 +157,20 @@ class LibraryController extends Controller
 
         return response()->json(['mensaje' => 'El código de juego ha sido actualizado',
         'id' => $library->id,],200);
+    }
+
+    public function borrado($id)
+    {
+        $library = Library::find($id);
+        if(empty($library) or $library->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $library->borrado = true;
+        $library->save();
+        return response()->json([
+            'msg' => 'La biblioteca ha sido eliminada (soft)',
+            'id' => $library->id,
+        ], 200);
     }
 
     /**

@@ -29,6 +29,7 @@ Route::get('/genders','GenderController@index');
 Route::get('/gender/{id}','GenderController@show');
 Route::post('/gender/create','GenderController@store');
 Route::put('/gender/update/{id}','GenderController@update');
+Route::put('/gender/borrar/{id}','GenderController@borrado');
 Route::delete('/gender/delete/{id}','GenderController@destroy');
 
 // CoinPack
@@ -44,6 +45,7 @@ Route::get('/paymentmethods','PaymentMethodController@index');
 Route::get('/paymentmethod/{id}','PaymentMethodController@show');
 Route::post('/paymentmethod/create','PaymentMethodController@store');
 Route::put('/paymentmethod/update/{id}','PaymentMethodController@update');
+Route::put('/paymentmethod/borrar/{id}','PaymentMethodController@borrado');
 Route::delete('/paymentmethod/delete/{id}','PaymentMethodController@destroy');
 
 // AgeRestriction
@@ -67,6 +69,7 @@ Route::get('/roles','RoleController@index');
 Route::get('/role/{id}','RoleController@show');
 Route::post('/role/create','RoleController@store');
 Route::put('/role/update/{id}','RoleController@update');
+Route::put('/role/borrar/{id}','RoleController@borrado');
 Route::delete('/role/delete/{id}','RoleController@destroy');
 
 // Functionality
@@ -98,6 +101,7 @@ Route::get('/libraries','LibraryController@index');
 Route::get('/library/{id}','LibraryController@show');
 Route::post('/library/create','LibraryController@store');
 Route::put('/library/update/{id}','LibraryController@update');
+Route::put('/library/borrar/{id}','LibraryController@borrado');
 Route::delete('/library/delete/{id}','LibraryController@destroy');
 
 // GameWishList
@@ -113,6 +117,7 @@ Route::get('/geographicrestrictions','GeographicRestrictionController@index');
 Route::get('/geographicrestriction/{id}','GeographicRestrictionController@show');
 Route::post('/geographicrestriction/create','GeographicRestrictionController@store');
 Route::put('/geographicrestriction/update/{id}','GeographicRestrictionController@update');
+Route::put('/geographicrestriction/borrar/{id}','GeographicRestrictionController@borrado');
 Route::delete('/geographicrestriction/delete/{id}','GeographicRestrictionController@destroy');
 
 // BankMethod
@@ -128,6 +133,7 @@ Route::get('/rolefunctionalities','RoleFunctionalityController@index');
 Route::get('/rolefunctionality/{id}','RoleFunctionalityController@show');
 Route::post('/rolefunctionality/create','RoleFunctionalityController@store');
 Route::put('/rolefunctionality/update/{id}','RoleFunctionalityController@update');
+Route::put('/rolefunctionality/borrar/{id}','RoleFunctionalityController@borrado');
 Route::delete('/rolefunctionality/delete/{id}','RoleFunctionalityController@destroy');
 
 // UserCoin
@@ -135,6 +141,7 @@ Route::get('/usercoins','UserCoinController@index');
 Route::get('/usercoin/{id}','UserCoinController@show');
 Route::post('/usercoin/create','UserCoinController@store');
 Route::put('/usercoin/update/{id}','UserCoinController@update');
+Route::put('/usercoin/borrar/{id}','UserCoinController@borrado');
 Route::delete('/usercoin/delete/{id}','UserCoinController@destroy');
 
 // FollowUp
@@ -150,6 +157,7 @@ Route::get('/wishlists','WishListController@index');
 Route::get('/wishlist/{id}','WishListController@show');
 Route::post('/wishlist/create','WishListController@store');
 Route::put('/wishlist/update/{id}','WishListController@update');
+Route::put('/wishlist/borrar/{id}','WishListController@borrado');
 Route::delete('/wishlist/delete/{id}','WishListController@destroy');
 
 // Valuation
@@ -164,6 +172,7 @@ Route::delete('/valuation/delete/{id}','ValuationController@destroy');
 Route::get('/transactions','TransactionController@index');
 Route::get('/transaction/{id}','TransactionController@show');
 Route::post('/transaction/create','TransactionController@store');
+Route::put('/transaction/update/{id}','TransactionController@update');
 Route::put('/transaction/borrar/{id}','TransactionController@borrado');
 Route::delete('/transaction/delete/{id}','TransactionController@destroy');
 
@@ -172,6 +181,7 @@ Route::get('/userpaymentmethods','UserPaymentMethodController@index');
 Route::get('/userpaymentmethod/{id}','UserPaymentMethodController@show');
 Route::post('/userpaymentmethod/create','UserPaymentMethodController@store');
 Route::put('/userpaymentmethod/update/{id}','UserPaymentMethodController@update');
+Route::put('/userpaymentmethod/borrar/{id}','UserPaymentMethodController@borrado');
 Route::delete('/userpaymentmethod/delete/{id}','UserPaymentMethodController@destroy');
 
 // User
@@ -179,6 +189,7 @@ Route::get('/users','UserController@index');
 Route::get('/user/{id}','UserController@show');
 Route::post('/user/create','UserController@store');
 Route::put('/user/update/{id}','UserController@update');
+Route::put('/user/borrar/{id}','UserController@borrado');
 Route::delete('/user/delete/{id}','UserController@destroy');
 
 // Game

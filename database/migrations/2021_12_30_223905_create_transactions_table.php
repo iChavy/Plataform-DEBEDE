@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('ID_Usuario')->nullable();
             $table->foreign('ID_Usuario')->references('id')->on('users');
 
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

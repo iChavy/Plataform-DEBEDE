@@ -17,6 +17,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->id();
             $table->string("Nombre",100);
             $table->bigInteger("Nro_tarjeta");
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

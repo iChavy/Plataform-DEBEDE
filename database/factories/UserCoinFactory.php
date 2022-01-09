@@ -27,7 +27,8 @@ class UserCoinFactory extends Factory
     {
         return [
             'ID_Usuario' => User::all()->random()->id,
-            'ID_paquete' => CoinPack::all()->random()->id
+            'ID_paquete' => CoinPack::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

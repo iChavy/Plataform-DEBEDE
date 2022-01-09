@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller; 
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('borrado',false)->get();
         if($users->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran usuarios.']);
@@ -75,6 +76,7 @@ class UserController extends Controller
         $newUser->Saldo_Moneda = 0;
         $newUser->ID_Rol = 1;
         $newUser->ID_Pais = $request->ID_Pais;
+        $newUser->borrado = false;
         $newUser->save();
 
         return response()->json([
@@ -92,7 +94,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if(empty($user)){
+        if(empty($user) or $user->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado.']);
         }
         return response($user, 200);
@@ -182,6 +184,20 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             'msg' => 'El usuario ha sido modificado.',
+            'id' => $user->id,
+        ], 200);
+    }
+
+    public function borrado($id)
+    {
+        $user = User::find($id);
+        if(empty($user) or $user->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $user->borrado = true;
+        $user->save();
+        return response()->json([
+            'msg' => 'El usuario ha sido eliminado (soft)',
             'id' => $user->id,
         ], 200);
     }

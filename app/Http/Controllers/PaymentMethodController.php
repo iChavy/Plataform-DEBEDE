@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        $paymentmethods = PaymentMethod::all();
+        $paymentmethods = PaymentMethod::where('borrado',false)->get();
         if($paymentmethods->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran métodos de pago.']);
@@ -62,6 +63,7 @@ class PaymentMethodController extends Controller
         $newPaymentMethod = new PaymentMethod();
         $newPaymentMethod->Nombre = $request->Nombre;
         $newPaymentMethod->Nro_tarjeta = $request->Nro_tarjeta;
+        $newPaymentMethod->borrado = false;
         $newPaymentMethod->save();
 
         return response()->json([
@@ -79,7 +81,7 @@ class PaymentMethodController extends Controller
     public function show($id)
     {
         $paymentmethod = PaymentMethod::find($id);
-        if(empty($paymentmethod)){
+        if(empty($paymentmethod) or $paymentmethod->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($paymentmethod, 200);
@@ -152,6 +154,20 @@ class PaymentMethodController extends Controller
 
         return response()->json(['mensaje' => 'El número de la tarjeta ha sido actualizado',
         'id' => $paymentmethod->id,],200);
+    }
+
+    public function borrado($id)
+    {
+        $paymentmethod = PaymentMethod::find($id);
+        if(empty($paymentmethod) or $paymentmethod->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $paymentmethod->borrado = true;
+        $paymentmethod->save();
+        return response()->json([
+            'msg' => 'El método de pago ha sido eliminado (soft)',
+            'id' => $paymentmethod->id,
+        ], 200);
     }
 
     /**

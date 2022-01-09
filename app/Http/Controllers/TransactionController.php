@@ -16,7 +16,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::where('borrado',false)->get();
         if($transactions->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran transacciones']);
@@ -66,6 +66,7 @@ class TransactionController extends Controller
         $newTransaction = new Transaction();
         $newTransaction->ID_Usuario = $request->ID_Usuario;
         $newTransaction->Fecha = $request->Fecha;
+        $newTransaction->borrado = false;
         $newTransaction->save();
 
         return response()->json([
@@ -84,7 +85,7 @@ class TransactionController extends Controller
     public function show($id) 
     {
         $transaction = Transaction::find($id);
-        if(empty($transaction)){
+        if(empty($transaction) or $transaction->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -166,6 +167,20 @@ class TransactionController extends Controller
         return response()->json(['mensaje' => 'la fecha ha sido actualizada',
             'id' => $transaction->id,],200);        
         
+    }
+
+    public function borrado($id)
+    {
+        $transaction = Transaction::find($id);
+        if(empty($transaction) or $transaction->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $transaction->borrado = true;
+        $transaction->save();
+        return response()->json([
+            'msg' => 'La transacción ha sido eliminada (soft)',
+            'id' => $transaction->id,
+        ], 200);
     }
 
     /**

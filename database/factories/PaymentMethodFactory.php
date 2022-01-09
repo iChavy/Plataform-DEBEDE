@@ -23,7 +23,8 @@ class PaymentMethodFactory extends Factory
     {
         return [
             'Nombre' => $this->faker->creditCardType,
-            'Nro_tarjeta' => $this->faker->creditCardNumber 
+            'Nro_tarjeta' => $this->faker->creditCardNumber,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

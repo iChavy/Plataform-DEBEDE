@@ -29,7 +29,8 @@ class UserFactory extends Factory
             'Fecha_Nacimiento' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'Saldo_Moneda' => $this->faker->numberBetween($min=0, $max=10000000),
             'ID_Rol' => Role::all()->random()->id,
-            'ID_Pais' => Country::all()->random()->id
+            'ID_Pais' => Country::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

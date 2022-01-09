@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller; 
 
 use App\Models\WishList;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class WishListController extends Controller
      */
     public function index()
     {
-        $wishlists = WishList::all();
+        $wishlists = WishList::where('borrado',false)->get();
         if($wishlists->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran listas de deseo.']);
@@ -64,6 +65,7 @@ class WishListController extends Controller
         $newWishList = new WishList();
         $newWishList->ID_Usuario = $request->ID_Usuario;
         $newWishList->NombreLista = $request->NombreLista;
+        $newWishList->borrado = false;
         $newWishList->save();
 
         return response()->json([
@@ -81,7 +83,7 @@ class WishListController extends Controller
     public function show($id)
     {
         $wishlist = WishList::find($id);
-        if(empty($wishlist)){
+        if(empty($wishlist) or $wishlist->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($wishlist, 200);
@@ -157,6 +159,20 @@ class WishListController extends Controller
 
         return response()->json(['mensaje' => 'El nombre de la lista ha sido actualizado',
         'id' => $wishlist->id,],200);
+    }
+
+    public function borrado($id)
+    {
+        $wishlist = WishList::find($id);
+        if(empty($wishlist) or $wishlist->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $wishlist->borrado = true;
+        $wishlist->save();
+        return response()->json([
+            'msg' => 'La lista de deseo ha sido eliminada (soft)',
+            'id' => $wishlist->id,
+        ], 200);
     }
 
     /**
