@@ -45,9 +45,10 @@ class AgeRestrictionController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Tipo_restriccion' => 'required|min:3|max:40',
+                'Tipo_restriccion' => 'required|min:3|max:40|unique:age_restrictions',
             ],
             [
+                'Tipo_restriccion.unique' => 'El tipo de restricción ya existe',
                 'Tipo_restriccion.required' => 'Se debe ingresar la restriccion de edad',
                 'Tipo_restriccion.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_restriccion.max' => 'Debe ser de largo máximo :max',
@@ -108,9 +109,10 @@ class AgeRestrictionController extends Controller
         $validator = Validator::make(
             $request->only(['Tipo_restriccion']),
             [
-                'Tipo_restriccion' => 'required|min:3|max:40',
+                'Tipo_restriccion' => 'required|min:3|max:40|unique:age_restrictions',
             ],
             [
+                'Tipo_restriccion.unique' => 'El tipo de restricción ya existe',
                 'Tipo_restriccion.required' => 'Se debe ingresar la restriccion de edad',
                 'Tipo_restriccion.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_restriccion.max' => 'Debe ser de largo máximo :max',

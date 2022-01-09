@@ -45,10 +45,11 @@ class RoleController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:4|max:15',
+                'Nombre' => 'required|min:4|max:15|unique:roles',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del rol',
+                'Nombre.unique' => 'El nombre del rol ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
             ]
@@ -108,10 +109,11 @@ class RoleController extends Controller
         $validator = Validator::make(
             $request->only(['Nombre']),
             [
-                'Nombre' => 'required|min:4|max:15',
+                'Nombre' => 'required|min:4|max:15|unique:roles',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del rol',
+                'Nombre.unique' => 'El nombre del rol ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
             ]

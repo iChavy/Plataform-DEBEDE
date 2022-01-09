@@ -169,3 +169,10 @@ Route::get('/user/{id}','UserController@show');
 Route::post('/user/create','UserController@store');
 Route::put('/user/update/{id}','UserController@update');
 Route::delete('/user/delete/{id}','UserController@destroy');
+
+// Game
+Route::get('/games','GameController@index');
+Route::get('/game/{id}','GameController@show');
+Route::post('/game/create','GameController@store');
+Route::put('/game/update/{id}','GameController@update');
+Route::delete('/game/delete/{id}','GameController@destroy');

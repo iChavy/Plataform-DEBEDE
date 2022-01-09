@@ -45,10 +45,11 @@ class CountryController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:4|max:60',
+                'Nombre' => 'required|min:4|max:60|unique:countries',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del pais',
+                'Nombre.unique' => 'El país ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
             ]
@@ -108,10 +109,11 @@ class CountryController extends Controller
         $validator = Validator::make(
             $request->only(['Nombre']),
             [
-                'Nombre' => 'required|min:4|max:60',
+                'Nombre' => 'required|min:4|max:60|unique:countries',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del pais',
+                'Nombre.unique' => 'El país ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
             ]

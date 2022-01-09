@@ -45,15 +45,17 @@ class FunctionalityController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:4|max:100',
-                'Descripcion' => 'required|min:10|max:200',
+                'Nombre' => 'required|min:4|max:100|unique:functionalities',
+                'Descripcion' => 'required|min:10|max:200|unique:functionalities',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre de la funcionalidad',
+                'Nombre.unique' => 'El nombre de la funcionalidad ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
 
                 'Descripcion.required' => 'Se debe ingresar la descripción de la funcionalidad',
+                'Descripcion.unique' => 'la descripción de la funcionalidad ya existe',
                 'Descripcion.min' => 'Debe ser de largo mínimo :min',
                 'Descripcion.max' => 'Debe ser de largo máximo :max',
             ]
@@ -114,13 +116,15 @@ class FunctionalityController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'nullable|min:4|max:100',
-                'Descripcion' => 'nullable|min:10|max:200',
+                'Nombre' => 'nullable|min:4|max:100|unique:functionalities',
+                'Descripcion' => 'nullable|min:10|max:200|unique:functionalities',
             ],
             [
+                'Nombre.unique' => 'El nombre de la funcionalidad ya existe',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
 
+                'Descripcion.unique' => 'la descripción de la funcionalidad ya existe',
                 'Descripcion.min' => 'Debe ser de largo mínimo :min',
                 'Descripcion.max' => 'Debe ser de largo máximo :max',
             ]

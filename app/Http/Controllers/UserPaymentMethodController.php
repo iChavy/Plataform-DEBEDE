@@ -47,7 +47,7 @@ class UserPaymentMethodController extends Controller
             [
                 'ID_Metodo' => 'required|integer|exists:payment_methods,id',
                 'ID_Usuario' => 'required|integer|exists:users,id',
-                'Fecha' => 'required|date',
+                'Fecha' => 'required|date:YYYY-MM-DD HH:mm:ss',
             ],
             [
                 'ID_Metodo.required' => 'Se debe ingresar el ID de método',
@@ -122,7 +122,7 @@ class UserPaymentMethodController extends Controller
             [
                 'ID_Metodo' => 'nullable|integer|exists:payment_methods,id',
                 'ID_Usuario' => 'nullable|integer|exists:users,id',
-                'Fecha' => 'nullable|date',
+                'Fecha' => 'nullable|date:YYYY-MM-DD HH:mm:ss',
             ],
             [
                 'ID_Metodo.integer' => 'Debe ser un entero',
@@ -131,7 +131,7 @@ class UserPaymentMethodController extends Controller
                 'ID_Usuario.integer' => 'Debe ser un entero',
                 'ID_Usuario.exists' => 'El ID del usuario ingresado no existe',
 
-                'Fecha.date' => 'Debe ser tipo date, ej: AAAA-MM-DD HH:MM:SS',
+                
                 'Fecha.exists' => 'La fecha ingresada no existe',
             ]
         );
@@ -146,8 +146,8 @@ class UserPaymentMethodController extends Controller
         }
 
         if (($request->ID_Metodo == $userpaymentmethod->ID_Metodo)|
-        ($request->ID_Usuario == $userpaymentmethod->ID_Usuario)|
-        ($request->Fecha == $userpaymentmethod->Fecha)){
+            ($request->ID_Usuario == $userpaymentmethod->ID_Usuario)|
+            ($request->Fecha == $userpaymentmethod->Fecha)){
             return response()->json([
                 "message" => "Los datos ingresados son iguales a los actuales."
             ], 404);
