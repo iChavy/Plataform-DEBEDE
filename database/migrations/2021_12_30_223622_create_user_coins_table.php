@@ -22,6 +22,7 @@ class CreateUserCoinsTable extends Migration
             $table->unsignedBigInteger('ID_paquete')->nullable();
             $table->foreign('ID_paquete')->references('id')->on('coin_packs');
 
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

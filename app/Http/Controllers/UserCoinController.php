@@ -16,7 +16,7 @@ class UserCoinController extends Controller
      */
     public function index()
     {
-        $usercoins = UserCoin::all();
+        $usercoins = UserCoin::where('borrado',false)->get();
         if($usercoins->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran monedas para usuario']);
@@ -66,6 +66,7 @@ class UserCoinController extends Controller
         $newUserCoin = new UserCoin();
         $newUserCoin->ID_Usuario = $request->ID_Usuario;
         $newUserCoin->ID_paquete = $request->ID_paquete;
+        $newUserCoin->borrado = false;
         $newUserCoin->save();
 
         return response()->json([
@@ -84,7 +85,7 @@ class UserCoinController extends Controller
     public function show($id) 
     {
         $usercoin = UserCoin::find($id);
-        if(empty($usercoin)){
+        if(empty($usercoin) or $usercoin->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -168,6 +169,20 @@ class UserCoinController extends Controller
         
     }
 
+    public function borrado($id)
+    {
+        $usercoin = UserCoin::find($id);
+        if(empty($usercoin) or $usercoin->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $usercoin->borrado = true;
+        $usercoin->save();
+        return response()->json([
+            'msg' => 'La moneda para usuario ha sido eliminada (soft)',
+            'id' => $usercoin->id,
+        ], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -182,7 +197,7 @@ class UserCoinController extends Controller
         }
         $usercoin->delete();
         return response()->json([
-            'mensaje' => 'La modena para usuario ha sido eliminada',
+            'mensaje' => 'La moneda para usuario ha sido eliminada',
             'id' => $usercoin->id,
         ], 200);
         

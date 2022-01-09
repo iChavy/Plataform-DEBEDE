@@ -22,6 +22,7 @@ class CreateUserPaymentMethodsTable extends Migration
             $table->unsignedBigInteger('ID_Usuario')->nullable();
             $table->foreign('ID_Usuario')->references('id')->on('users');
             $table->dateTimeTZ("Fecha", $precision = 0);
+            $table->boolean("borrado");
 
             $table->timestamps();
         });

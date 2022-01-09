@@ -19,6 +19,7 @@ class CreateWishListsTable extends Migration
             $table->string("NombreLista",100);
             $table->unsignedBigInteger('ID_Usuario')->nullable();
             $table->foreign('ID_Usuario')->references('id')->on('users');
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

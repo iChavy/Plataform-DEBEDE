@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::where('borrado',false)->get();
         if($roles->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran roles']);
@@ -61,6 +61,7 @@ class RoleController extends Controller
 
         $newRole = new Role();
         $newRole->Nombre = $request->Nombre;
+        $newRole->borrado = false;
         $newRole->save();
 
         return response()->json([
@@ -79,7 +80,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        if(empty($role)){
+        if(empty($role) or $role->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
 
@@ -141,6 +142,20 @@ class RoleController extends Controller
             'id' => $role->id,
         ], 200);
         
+    }
+
+    public function borrado($id)
+    {
+        $role = Role::find($id);
+        if(empty($role) or $role->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $role->borrado = true;
+        $role->save();
+        return response()->json([
+            'msg' => 'El rol ha sido eliminado (soft)',
+            'id' => $role->id,
+        ], 200);
     }
 
     /**

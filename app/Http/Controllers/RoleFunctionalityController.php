@@ -16,7 +16,7 @@ class RoleFunctionalityController extends Controller
      */
     public function index()
     {
-        $rolefunctionalities = RoleFunctionality::all();
+        $rolefunctionalities = RoleFunctionality::where('borrado',false)->get();
         if($rolefunctionalities->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran Funcionalidades para Rol']);
@@ -66,6 +66,7 @@ class RoleFunctionalityController extends Controller
         $newRoleFunctionality = new RoleFunctionality();
         $newRoleFunctionality->ID_funcionalidad = $request->ID_funcionalidad;
         $newRoleFunctionality->ID_Rol = $request->ID_Rol;
+        $newRoleFunctionality->borrado = false;
         $newRoleFunctionality->save();
 
         return response()->json([
@@ -84,7 +85,7 @@ class RoleFunctionalityController extends Controller
     public function show($id) 
     {
         $rolefunctionality = RoleFunctionality::find($id);
-        if(empty($rolefunctionality)){
+        if(empty($rolefunctionality) or $rolefunctionality->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -166,6 +167,20 @@ class RoleFunctionalityController extends Controller
         return response()->json(['mensaje' => 'El Id del rol ha sido actualizado',
             'id' => $rolefunctionality->id,],200);        
         
+    }
+
+    public function borrado($id)
+    {
+        $rolefunctionality = RoleFunctionality::find($id);
+        if(empty($rolefunctionality) or $rolefunctionality->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $rolefunctionality->borrado = true;
+        $rolefunctionality->save();
+        return response()->json([
+            'msg' => 'La funcionalidad ha sido eliminada (soft)',
+            'id' => $rolefunctionality->id,
+        ], 200);
     }
 
     /**

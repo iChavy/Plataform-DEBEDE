@@ -16,7 +16,7 @@ class UserPaymentMethodController extends Controller
      */
     public function index()
     {
-        $userpaymentmethods = UserPaymentMethod::all();
+        $userpaymentmethods = UserPaymentMethod::where('borrado',false)->get();
         if($userpaymentmethods->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran métodos de pago para usuario']);
@@ -72,6 +72,7 @@ class UserPaymentMethodController extends Controller
         $newUserPaymentMethod->ID_Metodo = $request->ID_Metodo;
         $newUserPaymentMethod->ID_Usuario = $request->ID_Usuario;
         $newUserPaymentMethod->Fecha = $request->Fecha;
+        $newUserPaymentMethod->borrado = false;
         $newUserPaymentMethod->save();
 
         return response()->json([
@@ -90,7 +91,7 @@ class UserPaymentMethodController extends Controller
     public function show($id) 
     {
         $userpaymentmethod = UserPaymentMethod::find($id);
-        if(empty($userpaymentmethod)){
+        if(empty($userpaymentmethod) or $userpaymentmethod->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -187,6 +188,20 @@ class UserPaymentMethodController extends Controller
         return response()->json(['mensaje' => 'la fecha ha sido actualizada',
             'id' => $userpaymentmethod->id,],200);        
         
+    }
+
+    public function borrado($id)
+    {
+        $userpaymentmethod = UserPaymentMethod::find($id);
+        if(empty($userpaymentmethod) or $userpaymentmethod->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $userpaymentmethod->borrado = true;
+        $userpaymentmethod->save();
+        return response()->json([
+            'msg' => 'El método de pago de usuario ha sido eliminado (soft)',
+            'id' => $userpaymentmethod->id,
+        ], 200);
     }
 
     /**

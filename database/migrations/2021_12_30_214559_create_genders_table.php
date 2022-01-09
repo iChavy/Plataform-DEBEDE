@@ -17,6 +17,7 @@ class CreateGendersTable extends Migration
             $table->id();
 
             $table->string('Tipo_genero', 50);
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

@@ -22,7 +22,8 @@ class GenderFactory extends Factory
     public function definition()
     {
         return [
-            'Tipo_genero' => $this->faker->unique()->text($maxNbChars = 50)
+            'Tipo_genero' => $this->faker->unique()->text($maxNbChars = 50),
+            'borrado' => $this->faker->boolean
         ];
     }
 }

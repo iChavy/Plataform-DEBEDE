@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('ID_Pais')->nullable();
             $table->foreign('ID_Pais')->references('id')->on('countries');
 
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

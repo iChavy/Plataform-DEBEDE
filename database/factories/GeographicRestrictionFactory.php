@@ -27,7 +27,8 @@ class GeographicRestrictionFactory extends Factory
     {
         return [
             'ID_Pais' => Country::all()->random()->id,
-            'Codigo_Juego' => Game::all()->random()->id
+            'Codigo_Juego' => Game::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

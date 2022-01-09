@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller; 
 
 use App\Models\Gender;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class GenderController extends Controller
      */
     public function index()
     {
-        $genders = Gender::all();
+        $genders = Gender::where('borrado',false)->get();
         if($genders->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran géneros.',
@@ -61,6 +62,7 @@ class GenderController extends Controller
         }
         $newGender = new Gender();
         $newGender->Tipo_genero = $request->Tipo_genero;
+        $newGender->borrado = false; 
         $newGender->save();
 
         return response()->json([
@@ -78,7 +80,7 @@ class GenderController extends Controller
     public function show($id)
     {
         $gender = Gender::find($id);
-        if(empty($gender)){
+        if(empty($gender) or $gender->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($gender, 200);
@@ -136,6 +138,21 @@ class GenderController extends Controller
             'id' => $gender->id,
         ], 200);
     }
+
+    public function borrado($id)
+    {
+        $gender = Gender::find($id);
+        if(empty($gender) or $gender->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $gender->borrado = true;
+        $gender->save();
+        return response()->json([
+            'msg' => 'El género ha sido eliminado (soft)',
+            'id' => $gender->id,
+        ], 200);
+    } 
+
 
     /**
      * Remove the specified resource from storage.

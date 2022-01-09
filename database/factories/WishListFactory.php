@@ -24,7 +24,8 @@ class WishListFactory extends Factory
     {
         return [
             'NombreLista' => $this->faker->text($maxNbChars = 100),
-            'ID_Usuario' => User::all()->random()->id
+            'ID_Usuario' => User::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

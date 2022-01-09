@@ -25,7 +25,8 @@ class RoleFunctionalityFactory extends Factory
     {
         return [
             'ID_funcionalidad' => Functionality::all()->random()->id,
-            'ID_Rol' => Role::all()->random()->id
+            'ID_Rol' => Role::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

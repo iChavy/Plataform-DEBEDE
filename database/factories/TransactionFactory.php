@@ -26,8 +26,8 @@ class TransactionFactory extends Factory
     {
         return [
             'ID_Usuario' => User::all()->random()->id,            
-            'Fecha' => $this->faker->dateTime($max = 'now',$timezone = 'UTC')
-
+            'Fecha' => $this->faker->dateTime($max = 'now',$timezone = 'UTC'),
+            'borrado' => $this->faker->boolean
         ];
     }
 }

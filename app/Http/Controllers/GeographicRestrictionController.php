@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller; 
 
 use App\Models\GeographicRestriction;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class GeographicRestrictionController extends Controller
      */
     public function index()
     {
-        $geographicrestrictions = GeographicRestriction::all();
+        $geographicrestrictions = GeographicRestriction::where('borrado',false)->get();
         if($geographicrestrictions->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran restricciones geográficas.']);
@@ -63,6 +64,7 @@ class GeographicRestrictionController extends Controller
         $newGeographicRestriction = new GeographicRestriction();
         $newGeographicRestriction->ID_Pais = $request->ID_Pais;
         $newGeographicRestriction->Codigo_Juego = $request->Codigo_Juego;
+        $newGeographicRestriction->borrado = false;
         $newGeographicRestriction->save();
 
         return response()->json([
@@ -80,7 +82,7 @@ class GeographicRestrictionController extends Controller
     public function show($id)
     {
         $geographicrestriction = GeographicRestriction::find($id);
-        if(empty($geographicrestriction)){
+        if(empty($geographicrestriction) or $geographicrestriction->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($geographicrestriction, 200);
@@ -155,6 +157,20 @@ class GeographicRestrictionController extends Controller
 
         return response()->json(['mensaje' => 'El código de juego ha sido actualizado',
         'id' => $geographicrestriction->id,],200);
+    }
+
+    public function borrado($id)
+    {
+        $geographicrestriction = GeographicRestriction::find($id);
+        if(empty($geographicrestriction) or $geographicrestriction->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $geographicrestriction->borrado = true;
+        $geographicrestriction->save();
+        return response()->json([
+            'msg' => 'La restricción geográfica ha sido eliminada (soft)',
+            'id' => $geographicrestriction->id,
+        ], 200);
     }
 
     /**

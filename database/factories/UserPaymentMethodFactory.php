@@ -26,7 +26,9 @@ class UserPaymentMethodFactory extends Factory
         return [
             'Fecha' => $this->faker->dateTime($max = 'now'),
             'ID_Metodo' => PaymentMethod::all()->random()->id,
-            'ID_Usuario' => User::all()->random()->id
+            'ID_Usuario' => User::all()->random()->id,
+            'borrado' => $this->faker->boolean
+
         ];
     }
 }
