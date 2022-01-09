@@ -22,7 +22,8 @@ class BankFactory extends Factory
     public function definition()
     {
         return [
-            'Nombre' => $this->faker->unique()->text($maxNbChars = 100)
+            'Nombre' => $this->faker->unique()->text($maxNbChars = 100),
+            'borrado' => $this->faker->boolean
         ];
     }
 }

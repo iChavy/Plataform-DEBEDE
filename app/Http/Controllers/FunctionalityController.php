@@ -16,7 +16,7 @@ class FunctionalityController extends Controller
      */
     public function index()
     {
-        $functionalities = Functionality::all();
+        $functionalities = Functionality::where('borrado',false)->get();
         if($functionalities->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran funcionalidades']);
@@ -68,6 +68,7 @@ class FunctionalityController extends Controller
         $newFunctionality = new Functionality();
         $newFunctionality->Nombre = $request->Nombre;
         $newFunctionality->Descripcion = $request->Descripcion;
+        $newFunctionality->borrado = false;
         $newFunctionality->save();
 
         return response()->json([
@@ -86,7 +87,7 @@ class FunctionalityController extends Controller
     public function show($id)
     {
         $functionality = Functionality::find($id);
-        if(empty($functionality)){
+        if(empty($functionality) or $functionality->borrado == true){
             return response()->json(['mensaje' => 'El id ingresado no existe']);
         }
 
@@ -172,12 +173,20 @@ class FunctionalityController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $functionality = Functionality::find($id);
+        if(empty($functionality) or $functionality->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $functionality->borrado = true;
+        $functionality->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $functionality->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $functionality = Functionality::find($id);

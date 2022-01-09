@@ -27,7 +27,8 @@ class GameWishListFactory extends Factory
     {
         return [
             'ID_Lista' => WishList::all()->random()->id,
-            'Codigo_Juego' => Game::all()->random()->id
+            'Codigo_Juego' => Game::all()->random()->id,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

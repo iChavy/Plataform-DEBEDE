@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Gender::factory(10)->create();
         \App\Models\Bank::factory(10)->create();
         \App\Models\Functionality::factory(10)->create();
-        \App\Models\Role::factory(10)->create();
+        \App\Models\Role::factory(3)->create();
         \App\Models\PaymentMethod::factory(10)->create();
         \App\Models\CoinPack::factory(10)->create();
         

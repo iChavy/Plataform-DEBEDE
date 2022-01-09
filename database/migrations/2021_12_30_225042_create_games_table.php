@@ -24,6 +24,7 @@ class CreateGamesTable extends Migration
             $table->foreign('ID_Restriccion')->references('id')->on('age_restrictions');
             $table->unsignedBigInteger('ID_Usuario')->nullable();
             $table->foreign('ID_Usuario')->references('id')->on('users');
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

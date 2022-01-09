@@ -29,9 +29,8 @@ class ValuationFactory extends Factory
             'ID_Usuario' => User::all()->random()->id,
             'Codigo_Juego' => Game::all()->random()->id,
             'Comentario' => $this->faker->text($maxNbChars = 500),
-            'Like' => $this->faker->boolean
-
-
+            'Like' => $this->faker->boolean,
+            'borrado' => $this->faker->boolean
         ];
     }
 }

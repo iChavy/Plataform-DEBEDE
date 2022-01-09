@@ -21,7 +21,7 @@ class CreateBankMethodsTable extends Migration
 
             $table->unsignedBigInteger('ID_Metodo')->nullable();
             $table->foreign('ID_Metodo')->references('id')->on('payment_methods');
-
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

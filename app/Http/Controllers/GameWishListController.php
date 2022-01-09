@@ -15,7 +15,7 @@ class GameWishListController extends Controller
      */
     public function index()
     {
-        $gamewishlists = GameWishList::all();
+        $gamewishlists = GameWishList::where('borrado',false)->get();
         if($gamewishlists->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran listas de deseos con juegos.']);
@@ -63,6 +63,7 @@ class GameWishListController extends Controller
         $newGameWishList = new GameWishList();
         $newGameWishList->ID_Lista = $request->ID_Lista;
         $newGameWishList->Codigo_Juego = $request->Codigo_Juego;
+        $newGameWishList->borrado = false;
         $newGameWishList->save();
 
         return response()->json([
@@ -80,7 +81,7 @@ class GameWishListController extends Controller
     public function show($id)
     {
         $gamewishlist = GameWishList::find($id);
-        if(empty($gamewishlist)){
+        if(empty($gamewishlist) or $gamewishlist->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($gamewishlist, 200);
@@ -157,12 +158,20 @@ class GameWishListController extends Controller
         'id' => $gamewishlist->id,],200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $gamewishlist = GameWishList::find($id);
+        if(empty($gamewishlist) or $gamewishlist->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $gamewishlist->borrado = true;
+        $gamewishlist->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $gamewishlist->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $gamewishlist = GameWishList::find($id);

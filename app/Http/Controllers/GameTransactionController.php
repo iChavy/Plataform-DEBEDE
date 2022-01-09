@@ -15,7 +15,7 @@ class GameTransactionController extends Controller
      */
     public function index()
     {
-        $gametransactions = GameTransaction::all();
+        $gametransactions = GameTransaction::where('borrado',false)->get();
         if($gametransactions->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran transacciones por juegos.']);
@@ -63,6 +63,7 @@ class GameTransactionController extends Controller
         $newGameTransaction = new GameTransaction();
         $newGameTransaction->ID_Transaccion = $request->ID_Transaccion;
         $newGameTransaction->Codigo_Juego = $request->Codigo_Juego;
+        $newGameTransaction->borrado = false;
         $newGameTransaction->save();
 
         return response()->json([
@@ -80,7 +81,7 @@ class GameTransactionController extends Controller
     public function show($id)
     {
         $gametransaction = GameTransaction::find($id);
-        if(empty($gametransaction)){
+        if(empty($gametransaction) or $gametransaction->borrado == true){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         return response($gametransaction, 200);
@@ -157,12 +158,20 @@ class GameTransactionController extends Controller
         'id' => $gametransaction->id,],200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $gametransaction = GameTransaction::find($id);
+        if(empty($gametransaction) or $gametransaction->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $gametransaction->borrado = true;
+        $gametransaction->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $gametransaction->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $gametransaction = GameTransaction::find($id);

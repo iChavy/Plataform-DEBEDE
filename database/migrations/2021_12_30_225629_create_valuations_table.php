@@ -24,6 +24,7 @@ class CreateValuationsTable extends Migration
             
             $table->string("Comentario",500);
             $table->boolean("Like");
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

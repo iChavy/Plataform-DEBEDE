@@ -23,7 +23,8 @@ class FunctionalityFactory extends Factory
     {
         return [
             'Nombre' => $this->faker->unique()->text($maxNbChars = 100),
-            'Descripcion' => $this->faker->unique()->text($maxNbChars = 200)
+            'Descripcion' => $this->faker->unique()->text($maxNbChars = 200),
+            'borrado' => $this->faker->boolean
         ];
     }
 }

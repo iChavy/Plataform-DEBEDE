@@ -18,6 +18,7 @@ class CreateFunctionalitiesTable extends Migration
 
             $table->string('Nombre', 100);
             $table->string('Descripcion', 200);
+            $table->boolean("borrado");
             $table->timestamps();
         });
     }

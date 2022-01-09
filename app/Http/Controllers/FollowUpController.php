@@ -16,7 +16,7 @@ class FollowUpController extends Controller
      */
     public function index()
     {
-        $followups = FollowUp::all();
+        $followups = FollowUp::where('borrado',false)->get();
         if($followups->isEmpty()){
             return response()->json([
                 'respuesta' => 'No se encuentran seguimientos']);
@@ -66,6 +66,7 @@ class FollowUpController extends Controller
         $newFollowUp = new FollowUp();
         $newFollowUp->ID_Usuario1 = $request->ID_Usuario1;
         $newFollowUp->ID_Usuario2 = $request->ID_Usuario2;
+        $newFollowUp->borrado = false;
         $newFollowUp->save();
 
         return response()->json([
@@ -84,7 +85,7 @@ class FollowUpController extends Controller
     public function show($id) 
     {
         $followup = FollowUp::find($id);
-        if(empty($followup)){
+        if(empty($followup) or $followup->borrado == true){
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -168,12 +169,20 @@ class FollowUpController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function borrado($id)
+    {
+        $followup = FollowUp::find($id);
+        if(empty($followup) or $followup->borrado == true){
+            return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
+        }
+        $followup->borrado = true;
+        $followup->save();
+        return response()->json([
+            'msg' => 'La valoración ha sido eliminada (soft)',
+            'id' => $followup->id,
+        ], 200);
+    }
+    
     public function destroy($id)
     {
         $followup = FollowUp::find($id);

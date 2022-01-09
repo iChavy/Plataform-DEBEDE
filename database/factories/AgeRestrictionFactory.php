@@ -22,7 +22,8 @@ class AgeRestrictionFactory extends Factory
     public function definition()
     {
         return [
-            'Tipo_restriccion' => $this->faker->unique()->text($maxNbChars = 40)
+            'Tipo_restriccion' => $this->faker->unique()->text($maxNbChars = 40),
+            'borrado' => $this->faker->boolean
         ];
     }
 }
