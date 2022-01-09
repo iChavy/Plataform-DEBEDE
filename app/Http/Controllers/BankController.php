@@ -45,12 +45,13 @@ class BankController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Nombre' => 'required|min:2|max:100',
+                'Nombre' => 'required|min:2|max:100|unique:banks',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del banco.',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
+                'Nombre.unique' => 'El nombre de banco ya existe.',
             ]
         );
         //Caso falla la validación
@@ -106,12 +107,13 @@ class BankController extends Controller
         $validator = Validator::make(
             $request->only(['Nombre']),
             [
-                'Nombre' => 'required|min:2|max:100',
+                'Nombre' => 'required|min:2|max:100|unique:banks',
             ],
             [
                 'Nombre.required' => 'Se debe ingresar el nombre del banco.',
                 'Nombre.min' => 'Debe ser de largo mínimo :min',
                 'Nombre.max' => 'Debe ser de largo máximo :max',
+                'Nombre.unique' => 'El nombre de banco ya existe.',
             ]
         );
         //Caso falla la validación

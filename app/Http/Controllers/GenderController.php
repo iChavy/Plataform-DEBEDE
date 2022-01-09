@@ -46,12 +46,13 @@ class GenderController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'Tipo_genero' => 'required|min:3|max:50',
+                'Tipo_genero' => 'required|min:3|max:50|unique:genders',
             ],
             [
                 'Tipo_genero.required' => 'Se debe ingresar el nombre del género del juego.',
                 'Tipo_genero.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_genero.max' => 'Debe ser de largo máximo :max',
+                'Tipo_genero.unique' => 'El tipo de género ya existe.',
             ]
         );
         //Caso falla la validación
@@ -106,12 +107,13 @@ class GenderController extends Controller
         $validator = Validator::make(
             $request->only(['Tipo_genero']),
             [
-                'Tipo_genero' => 'required|min:3|max:50',
+                'Tipo_genero' => 'required|min:3|max:50|unique:genders',
             ],
             [
                 'Tipo_genero.required' => 'Se debe ingresar el nombre del género del juego.',
                 'Tipo_genero.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_genero.max' => 'Debe ser de largo máximo :max',
+                'Tipo_genero.unique' => 'El tipo de género ya existe.',
             ]
         );
         //Caso falla la validación
