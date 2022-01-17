@@ -10,9 +10,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Juegos</a>
+                        <a class="nav-link" href="/juegos">Juegos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/crearJuego">Crear Juego</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/signup">Registrarse</a>
                     </li>

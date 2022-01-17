@@ -25,6 +25,14 @@ Route::get('/signup', function () {
 }); 
 Route::get('/signup', 'CountryController@index'); 
 
+Route::get('/juegos', function () {
+    return view('juegos');
+}); 
+Route::get('/crearJuego', function () {
+    return view('crearJuego');
+}); 
+Route::get('/juegos', 'GameController@index'); 
+
 // Bank
 Route::get('/banks','BankController@index');
 Route::get('/bank/{id}','BankController@show');

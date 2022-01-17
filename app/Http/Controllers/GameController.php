@@ -21,7 +21,7 @@ class GameController extends Controller
             return response()->json([
                 'respuesta' => 'No se encuentran juegos']);
         }
-        return response($games, 200);
+        return view('juegos',compact('games'));
     }
 
     /**
@@ -97,11 +97,7 @@ class GameController extends Controller
         $newGame->borrado = false;
         $newGame->save();
 
-        return response()->json([
-            'mensaje' => 'El juego ha sido creado',
-            'id' => $newGame->id,
-        ], 201);
-        
+        return view('home');        
     }
 
     /**
