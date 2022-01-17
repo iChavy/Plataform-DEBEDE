@@ -66,9 +66,11 @@ class UserController extends Controller
             ]
         );
         //Caso falla la validación
+        $validator->validate();
+        /*
         if($validator->fails()){
             return response($validator->errors(), 400);
-        }
+        }*/
         $newUser = new User();
         $newUser->Correo_electronico = $request->Correo_electronico;
         $newUser->Contrasenya = $request->Contrasenya;
@@ -78,12 +80,13 @@ class UserController extends Controller
         $newUser->ID_Pais = $request->ID_Pais;
         $newUser->borrado = false;
         $newUser->save();
-
+        /*
         return response()->json([
             'msg' => 'El usuario ha sido creado.',
             'id' => $newUser->id,
             
-        ], 201);
+        ], 201);*/
+        return view('home');
     }
 
     /**

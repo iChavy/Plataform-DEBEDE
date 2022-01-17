@@ -14,7 +14,7 @@
                         <a class="nav-link" href="#">Juegos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Registrarse</a>
+                        <a class="nav-link active" aria-current="page" href="/signup">Registrarse</a>
                     </li>
 
                 </ul>

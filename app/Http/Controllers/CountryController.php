@@ -21,7 +21,7 @@ class CountryController extends Controller
             return response()->json([
                 'respuesta' => 'No se encuentran paises']);
         }
-        return response($countries, 200);
+        return view('signup',compact('countries'));
     }
 
     /**

@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/signup', function () {
     return view('signup');
 }); 
+Route::get('/signup', 'CountryController@index'); 
 
 // Bank
 Route::get('/banks','BankController@index');
