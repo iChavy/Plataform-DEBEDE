@@ -82,6 +82,7 @@ class UserController extends Controller
         return response()->json([
             'msg' => 'El usuario ha sido creado.',
             'id' => $newUser->id,
+            
         ], 201);
     }
 

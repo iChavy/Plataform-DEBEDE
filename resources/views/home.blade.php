@@ -12,59 +12,25 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">DEBEDE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Juegos</a>
-                        </li>
-
-
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <div class="container">
-                <div class="row mt-5">
-                    <div class="col d-flex justify-content-end">
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Prueba</h5>
-                                <p class="card-text">Descripción.</p>
-                                <a href="#" class="btn btn-primary">Ir a Prueba</a>
-                            </div>
+    @include('includes.navbar')
+    <section>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col d-flex justify-content-end">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Prueba</h5>
+                            <p class="card-text">Descripción.</p>
+                            <a href="#" class="btn btn-primary">Ir a Prueba</a>
                         </div>
                     </div>
-                    <div class="col">
-                        Column
-                    </div>
-                    <div class="col">
-                        Column
-                    </div>
                 </div>
+                
             </div>
-        </section>
-    </main>
-    ><footer>
-
-    </footer>
+        </div>
+    </section>
+    @include('includes.footer')
 
 </body>
 
