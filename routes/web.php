@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::get('/', function () {
+    return view('home');
 });
+
 // Bank
 Route::get('/banks','BankController@index');
 Route::get('/bank/{id}','BankController@show');
