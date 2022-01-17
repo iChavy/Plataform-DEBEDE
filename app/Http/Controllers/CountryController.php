@@ -24,6 +24,7 @@ class CountryController extends Controller
         return view('signup',compact('countries'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

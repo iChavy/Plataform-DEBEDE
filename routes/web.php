@@ -33,6 +33,15 @@ Route::get('/crearJuego', function () {
 }); 
 Route::get('/juegos', 'GameController@index'); 
 
+Route::get('/crearJuego', 'AgeRestrictionController@index'); 
+
+Route::get('/modificarUser', function () {
+    return view('modificarUser');
+});
+Route::get('/modificarUser', 'UserController@edit'); //error dos parámetros
+Route::put('/modificarUser', 'UserController@update'); 
+ 
+
 // Bank
 Route::get('/banks','BankController@index');
 Route::get('/bank/{id}','BankController@show');
@@ -204,8 +213,9 @@ Route::delete('/userpaymentmethod/delete/{id}','UserPaymentMethodController@dest
 // User
 Route::get('/users','UserController@index');
 Route::get('/user/{id}','UserController@show');
+Route::get('/user/edit/{id}','UserController@edit');
 Route::post('/user/create','UserController@store');
-Route::put('/user/update/{id}','UserController@update');
+Route::put('/user/edit/{id}','UserController@update');
 Route::put('/user/borrar/{id}','UserController@borrado');
 Route::delete('/user/delete/{id}','UserController@destroy');
 

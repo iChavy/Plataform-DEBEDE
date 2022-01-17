@@ -21,7 +21,7 @@ class AgeRestrictionController extends Controller
             return response()->json([
                 'respuesta' => 'No se encuentran restricciones de edad']);
         }
-        return response($agerestrictions, 200);
+        return view('crearJuego',compact('agerestrictions'));
     }
 
 

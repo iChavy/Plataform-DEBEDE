@@ -19,13 +19,17 @@
 
                     <h4 class="mb-3">Crea un Juego</h4>
                     <form action="{{action('GameController@store')}}" method='POST'>
+
                         <div class="mb-3">
-                            <label for="ID_Restriccion" class="form-label">Restricción</label>
-                            <input type="integer" class="form-control @error('ID_Restriccion') is-invalid @enderror" id="name" name="ID_Restriccion" value="">
-                            @error('ID_Restriccion')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                        <label for="ID_Restriccion" class="form-label">Restricción de edad</label>
+                        <select class="form-select mb-4" aria-label="Seleccione un tipo de restricción de edad:" name="ID_Restriccion" id="ID_Restriccion">
+                            @foreach ($agerestrictions as $agerestriction)
+                                <option value="{{$agerestriction->id}}">{{$agerestriction->Tipo_restriccion}}</option>
+                            @endforeach
+                        </select>
                         </div>
+
+                        <!-- USUARIO CONECTADO DESARROLLADOR -->
                         <div class="mb-3">
                             <label for="ID_Usuario" class="form-label">Desarrollador</label>
                             <input type="integer" class="form-control @error('ID_Usuario') is-invalid @enderror" id="name" name="ID_Usuario" value="">

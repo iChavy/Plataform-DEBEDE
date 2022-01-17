@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller; 
 
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,9 +30,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function edit(User $user)
     {
-        //
+        $countries = Country::where('borrado',false)->get();
+        return view('modificarUser', compact('user','countries')); //no borrar
     }
 
     /**
@@ -110,10 +112,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -186,10 +185,14 @@ class UserController extends Controller
             $user->ID_Pais = $request->ID_Pais;
         }
         $user->save();
+        /*
         return response()->json([
             'msg' => 'El usuario ha sido modificado.',
             'id' => $user->id,
         ], 200);
+        */
+        $users = User::all();
+        return view('home',compact('users'));
     }
 
     public function borrado($id)
