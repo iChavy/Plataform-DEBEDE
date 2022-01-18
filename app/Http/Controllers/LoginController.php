@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class LoginController extends Controller
+{
+    public function login(Request $request){
+        $user = User::where('Correo_electronico', $request->email)->first();
+        if(empty($user)){
+            return redirect()->to('/login');
+        }
+        if($request->Contrasenya == $user->Contrasenya){
+            setcookie('user', $user->Correo_electronico); 
+            //setcookie('user', $user->id);// PROBAR CON DOMINIO
+            return (redirect()->to('/home'));
+        }
+        return redirect()->to('/login');
+    }
+
+    public function logout(Request $request)
+    {
+        setcookie('user', '', time()-1);
+        return redirect()->to('/home');
+    } 
+
+
+}

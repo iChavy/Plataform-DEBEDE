@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgeRestrictionController;
+use App\Models\AgeRestriction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,17 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
+
+//SignUp
 Route::get('/signup', function () {
     return view('signup');
 }); 
 Route::get('/signup', 'CountryController@index'); 
 
+//Juegos
 Route::get('/juegos', function () {
     return view('juegos');
 }); 
@@ -35,12 +40,21 @@ Route::get('/juegos', 'GameController@index');
 
 Route::get('/crearJuego', 'AgeRestrictionController@index'); 
 
+//Modificar Usuario
 Route::get('/modificarUser', function () {
     return view('modificarUser');
 });
 Route::get('/modificarUser', 'UserController@edit'); //error dos parámetros
 Route::put('/modificarUser', 'UserController@update'); 
  
+
+//Login
+Route::get('/login', function () {
+    return view('login');
+});
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+
 
 // Bank
 Route::get('/banks','BankController@index');

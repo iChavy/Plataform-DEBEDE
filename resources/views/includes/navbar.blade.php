@@ -26,6 +26,17 @@
                         <a class="nav-link active" aria-current="page" href="/modificarUser">Modificar usuario</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link active"  aria-current="page" href="/login">LOG IN</a>
+                    </li>
+                    @if(isset($_COOKIE['user']))
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/home">{{$_COOKIE['user']}}</a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link active"  aria-current="page" href="/logout">LOG OUT</a>
+                    </li>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
