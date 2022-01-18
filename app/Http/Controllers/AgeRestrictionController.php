@@ -14,7 +14,7 @@ class AgeRestrictionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index2()
     {
         $agerestrictions = AgeRestriction::where('borrado',false)->get();
         if($agerestrictions->isEmpty()){
@@ -22,6 +22,15 @@ class AgeRestrictionController extends Controller
                 'respuesta' => 'No se encuentran restricciones de edad']);
         }
         return view('crearJuego',compact('agerestrictions'));
+    }
+    public function index()
+    {
+        $agerestrictions = AgeRestriction::where('borrado',false)->get();
+        if($agerestrictions->isEmpty()){
+            return response()->json([
+                'respuesta' => 'No se encuentran restricciones de edad']);
+        }
+        return view('juegos',compact('agerestrictions'));
     }
 
 

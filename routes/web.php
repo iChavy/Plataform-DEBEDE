@@ -37,8 +37,10 @@ Route::get('/crearJuego', function () {
     return view('crearJuego');
 }); 
 Route::get('/juegos', 'GameController@index'); 
+//Route::get('/juegos', 'GameController@index2'); 
+//Route::get('/juegos', 'AgeRestrictionController@index'); 
 
-Route::get('/crearJuego', 'AgeRestrictionController@index'); 
+Route::get('/crearJuego', 'AgeRestrictionController@index2'); 
 
 //Modificar Usuario
 Route::get('/modificarUser', function () {
@@ -46,7 +48,8 @@ Route::get('/modificarUser', function () {
 });
 Route::get('/modificarUser', 'UserController@edit'); //error dos parámetros
 Route::put('/modificarUser', 'UserController@update'); 
- 
+
+
 
 //Login
 Route::get('/login', function () {
@@ -89,7 +92,9 @@ Route::put('/paymentmethod/borrar/{id}','PaymentMethodController@borrado');
 Route::delete('/paymentmethod/delete/{id}','PaymentMethodController@destroy');
 
 // AgeRestriction
-Route::get('/agerestrictions','AgeRestrictionController@index');
+//Route::get('/agerestrictions','AgeRestrictionController@index');
+
+Route::get('/agerestrictions','AgeRestrictionController@index2');
 Route::get('/agerestriction/{id}','AgeRestrictionController@show');
 Route::post('/agerestriction/create','AgeRestrictionController@store');
 Route::put('/agerestriction/update/{id}','AgeRestrictionController@update');
@@ -235,6 +240,7 @@ Route::delete('/user/delete/{id}','UserController@destroy');
 
 // Game
 Route::get('/games','GameController@index');
+Route::get('/games/index2','GameController@index2');
 Route::get('/game/{id}','GameController@show');
 Route::post('/game/create','GameController@store');
 Route::put('/game/update/{id}','GameController@update');

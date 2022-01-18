@@ -13,9 +13,16 @@
 
 <body>
     @include('includes.navbar')
+    <nav class="navbar navbar-light bg-light">
+        <form class="d-flex">
+            <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por título" aria-label="Search">
+            <button class="btn btn-primary" type="submit">Filtrar</button>
+        </form>
+    </nav>
+
     <section class="mt-5">
         <div class="container ">
-            <h4 class="mb-5">Elige un juego:</h4>
+            <h4 class="mb-5">Ranking de juegos más comprados:</h4>
             <div class="row text-center mb-4">
                 @foreach ($games as $game)
                 <div class="col-4 d-flex justify-content-center my-3">

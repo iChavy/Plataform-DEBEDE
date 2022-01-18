@@ -14,8 +14,18 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        if($request){
+            $Nombre = $request->get('buscarpor');
+            $games = Game::where('Nombre', 'like', "%$Nombre%")->orderBy('Numero_Ventas', 'asc')->get();  
+        }
+        
+        return view('juegos',['games' => $games, 'buscarpor' => $Nombre]);
+    }
+
+    public function index2()
+    {   
         $games = Game::where('borrado',false)->get();
         if($games->isEmpty()){
             return response()->json([
