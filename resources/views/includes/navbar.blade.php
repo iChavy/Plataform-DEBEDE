@@ -21,25 +21,28 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/signup">Registrarse</a>
                     </li>
-
+                    
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/modificarUser">Modificar usuario</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active"  aria-current="page" href="/login">LOG IN</a>
+                        <a class="nav-link active" aria-current="page" href="/login">LOG IN</a>
                     </li>
                     @if(isset($_COOKIE['user']))
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/home">{{$_COOKIE['user']}}</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
+                    </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link active"  aria-current="page" href="/logout">LOG OUT</a>
+                        <a class="nav-link active" aria-current="page" href="/logout">LOG OUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/carro">Carro de compras</a>
                     </li>
                 </ul>
-                
-                
+
+
             </div>
         </div>
     </nav>

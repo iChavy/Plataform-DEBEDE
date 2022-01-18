@@ -16,9 +16,6 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-
-
-
                     <h4 class="mb-3">Registrarse</h4>
                     <form action="{{action('UserController@store')}}" method='POST'>
                         <div class="mb-3">

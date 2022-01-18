@@ -34,6 +34,18 @@ class GameController extends Controller
         return view('juegos',compact('games'));
     }
 
+    public function vistaCarro($id)
+    {
+        $games = Game::find($id);
+        if(empty($games)){
+            return response()->json(['mensaje' => 'El ID ingresado no existe']);
+        }
+
+        return view('carro',compact('games'));
+
+    }
+    
+
     /**
      * Show the form for creating a new resource.
      *

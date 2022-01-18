@@ -21,7 +21,7 @@ class PaymentMethodController extends Controller
             return response()->json([
                 'respuesta' => 'No se encuentran métodos de pago.']);
         }
-        return response($paymentmethods, 200);
+        return view('tarjeta', compact('paymentmethods'));
     }
 
     /**

@@ -27,14 +27,13 @@
                 @foreach ($games as $game)
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
-                        <img src="{https://image.freepik.com/free-vector/play-vibrant-gradient-typography_53876-93868.jpg}" class="card-img-top" alt="Imagen del juego">
                         <div class="card-body">
-                            <h5 class="card-title">{{$game->Nombre}}</h5>
-                            <p class="card-text">{{$game->Precio}}</p>
-                            <a href="/game/{{ $game->id }}" class="btn btn-primary">Ver Juego</a>
+                            <h5 class="card-title">Nombre: {{$game->Nombre}}</h5>
+                            <p class="card-text">Precio: ${{$game->Precio}}</p>
+                            <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
-                </div>     
+                </div>
                 @endforeach
             </div>
         </div>
