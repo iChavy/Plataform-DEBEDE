@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller; 
 
 use App\Models\User;
+use App\Models\AgeRestriction;
+use App\Models\Game;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -42,8 +44,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
+        $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
+        $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
         $validator = Validator::make(
             $request->all(),
             [
@@ -88,7 +93,7 @@ class UserController extends Controller
             'id' => $newUser->id,
             
         ], 201);*/
-        return view('home');
+        return view('inicio', compact('agerestrictions','users', 'games'));
     }
 
     /**
@@ -158,9 +163,10 @@ class UserController extends Controller
             ]
         );
         //Caso falla la validación
-        if($validator->fails()){
+        /*if($validator->fails()){
             return response($validator->errors(), 400);
-        }
+        }*/
+        $validator->validate();
         $user = User::find($id);
         if(empty($user)){
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
@@ -202,7 +208,7 @@ class UserController extends Controller
         ], 200);
         */
         $users = User::all();
-        return view('home',compact('users'));
+        return (redirect()->to('/juegos'));
     }
 
     public function borrado($id)

@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         setcookie('user', '', time()-1);
         setcookie('id', '', time()-1);
-        return redirect()->to('/juegos');
+        return redirect()->to('/inicio');
     } 
 
 

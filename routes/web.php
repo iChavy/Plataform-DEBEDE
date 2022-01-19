@@ -36,8 +36,11 @@ Route::get('/juegos', function () {
 Route::get('/crearJuego', function () {
     return view('crearJuego');
 });
-Route::get('/juegos', 'GameController@index'); Route::get('/juegos', 'GameController@index');  //filtro nombre, ranking y no borrados
+Route::get('/juegos', 'GameController@index'); 
+Route::get('/juegos', 'GameController@index');  //filtro nombre, ranking y no borrados
 //Route::get('/juegos', 'AgeRestrictionController@index'); 
+
+Route::get('/inicio', 'GameController@indexInicio'); 
 
 Route::get('/crearJuego', 'AgeRestrictionController@index2');
 
@@ -59,6 +62,10 @@ Route::get('/logout', 'LoginController@logout');
 
 //Tarjeta
 Route::get('/tarjeta', 'PaymentMethodController@index');
+
+//Modificar Juego
+Route::get('/modificarJuego', 'GameController@edit');
+Route::put('/modificarJuego', 'GameController@update');
 
 
 // Bank
@@ -244,6 +251,8 @@ Route::delete('/user/delete/{id}', 'UserController@destroy');
 
 // Game
 Route::get('/game/vistacarro/{id}', 'GameController@vistaCarro');
+
+Route::get('/games', 'GameController@indexInicio'); 
 
 Route::get('/games', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
