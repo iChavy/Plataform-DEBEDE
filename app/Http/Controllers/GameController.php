@@ -124,10 +124,12 @@ class GameController extends Controller
                 'Link_Demo.url' => 'Debe ser un link',
             ]
         );
+
+        $validator->validate();
         //Caso falla la validación
-        if ($validator->fails()) {
+        /**if ($validator->fails()) {
             return response($validator->errors(), 400);
-        }
+        }**/
 
         $newGame = new Game();
         $newGame->ID_Restriccion = $request->ID_Restriccion;

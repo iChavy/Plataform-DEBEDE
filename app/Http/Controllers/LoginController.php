@@ -15,7 +15,9 @@ class LoginController extends Controller
         if($request->Contrasenya == $user->Contrasenya){
             setcookie('user', $user->Correo_electronico); 
             setcookie('id', $user->id);// PROBAR CON DOMINIO
-            return (redirect()->to('/home'));
+            $id = $user->id;
+            //agregar if para las vistas
+            return (redirect()->to('/user/vistaUser/'.$id));
         }
         return redirect()->to('/login');
     }
@@ -24,7 +26,7 @@ class LoginController extends Controller
     {
         setcookie('user', '', time()-1);
         setcookie('id', '', time()-1);
-        return redirect()->to('/home');
+        return redirect()->to('/juegos');
     } 
 
 

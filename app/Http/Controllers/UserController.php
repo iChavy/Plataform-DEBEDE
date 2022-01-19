@@ -106,6 +106,16 @@ class UserController extends Controller
         return response($user, 200);
     }
 
+    public function vistaUser($id)
+    {
+        $users = User::find($id);
+        if (empty($users)) {
+            return response()->json(['mensaje' => 'El ID ingresado no existe']);
+        }
+
+        return view('home', compact('users'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -17,12 +17,14 @@
         <div class="container">
             <div class="row mt-5">
                 <div class="col d-flex justify-content-end">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                    <div class="card" style="width: 20rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Prueba</h5>
-                            <p class="card-text">Descripción.</p>
-                            <a href="#" class="btn btn-primary">Ir a Prueba</a>
+                            <h5 class="card-title">Datos del usuario</h5>
+                            <p class="card-text">ID: {{$users->id}}.</p>
+                            <p class="card-text">Correo electrónico: {{$users->Correo_electronico}}.</p>
+                            <p class="card-text">Fecha de nacimiento: {{$users->Fecha_Nacimiento}}.</p>
+                            <p class="card-text">ID País: {{$users->ID_Pais}}.</p>
+                            <p class="card-text">ID Rol: {{$users->ID_Rol}}.</p>
                         </div>
                     </div>
                 </div>

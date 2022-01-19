@@ -232,6 +232,8 @@ Route::put('/userpaymentmethod/borrar/{id}', 'UserPaymentMethodController@borrad
 Route::delete('/userpaymentmethod/delete/{id}', 'UserPaymentMethodController@destroy');
 
 // User
+Route::get('/user/vistaUser/{id}', 'UserController@vistaUser');
+
 Route::get('/users', 'UserController@index');
 Route::get('/user/{id}', 'UserController@show');
 Route::get('/user/edit/{id}', 'UserController@edit');
