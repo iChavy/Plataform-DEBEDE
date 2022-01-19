@@ -70,6 +70,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Nombre: {{$game->Nombre}}</h5>
                             <p class="card-text">Precio: ${{$game->Precio}}</p>
+                            <p class="card-text">Número de ventas: {{$game->Numero_Ventas}}</p>
                             <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-primary">Comprar</a>
                             <a href="/game/vistaJuegoAd/{{ $game->id }}" class="btn btn-primary">Editar</a>
                             <a href="/game/vistaEliminar/{{ $game->id }}" class="btn btn-primary">Borrar</a>

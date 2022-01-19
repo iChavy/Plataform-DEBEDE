@@ -73,6 +73,7 @@
                             <h5 class="card-title">Nombre: {{$game->Nombre}}</h5>
                             <p class="card-text">DESCRIPCIÓN: </p>
                             <p class="card-text">Precio: ${{$game->Precio}}</p>
+                            <p class="card-text">Número de ventas: {{$game->Numero_Ventas}}</p>
                         </div>
                     </div>
                 </div>
