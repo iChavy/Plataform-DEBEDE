@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller; 
+
+use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use App\Models\AgeRestriction;
@@ -21,20 +22,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('borrado',false)->get();
-        if($users->isEmpty()){
+        $users = User::where('borrado', false)->get();
+        if ($users->isEmpty()) {
             return response()->json([
-                'respuesta' => 'No se encuentran usuarios.']);
+                'respuesta' => 'No se encuentran usuarios.'
+            ]);
         }
         return response($users, 200);
     }
 
     public function indexSeguidos($id)
     {
-        $followups = FollowUp::where('ID_Usuario1', $id)->where('borrado', false)->get();
+        $resultados = User::join("follow_ups", "follow_ups.ID_Usuario2", "=", "users.id")
+            ->select("follow_ups.ID_Usuario2", "users.Correo_electronico", "follow_ups.ID_Usuario1")->where('ID_Usuario1', $id)
+            ->get();
         
-
-        return view('seguidos', compact('followups'));
+        return view('seguidos', compact('resultados'));
     }
 
     /**
@@ -44,8 +47,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $countries = Country::where('borrado',false)->get();
-        return view('modificarUser', compact('user','countries')); //no borrar
+        $countries = Country::where('borrado', false)->get();
+        return view('modificarUser', compact('user', 'countries')); //no borrar
     }
 
     /**
@@ -54,7 +57,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $agerestrictions = AgeRestriction::where('borrado', false)->get();
         $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
@@ -64,7 +67,7 @@ class UserController extends Controller
             [
                 'Correo_electronico' => 'required|min:6|max:100|unique:users',
                 'Contrasenya' => 'required|min:6|max:20',
-                'Fecha_Nacimiento' => 'required|date_format:Y-m-d',     
+                'Fecha_Nacimiento' => 'required|date_format:Y-m-d',
                 'ID_Pais' => 'required|integer|exists:countries,id',
             ],
             [
@@ -103,7 +106,7 @@ class UserController extends Controller
             'id' => $newUser->id,
             
         ], 201);*/
-        return view('inicio', compact('agerestrictions','users', 'games'));
+        return view('inicio', compact('agerestrictions', 'users', 'games'));
     }
 
     /**
@@ -115,7 +118,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if(empty($user) or $user->borrado == true){
+        if (empty($user) or $user->borrado == true) {
             return response()->json(['mensaje' => 'No se encuentra el id ingresado.']);
         }
         return response($user, 200);
@@ -139,7 +142,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -155,8 +158,8 @@ class UserController extends Controller
             [
                 'Correo_electronico' => 'nullable|min:6|max:100|unique:users',
                 'Contrasenya' => 'nullable|min:6|max:20',
-                'Fecha_Nacimiento' => 'nullable|date_format:Y-m-d',     
-                'Saldo_Moneda' => 'nullable|integer',  
+                'Fecha_Nacimiento' => 'nullable|date_format:Y-m-d',
+                'Saldo_Moneda' => 'nullable|integer',
                 'ID_Rol' => 'nullable|integer|exists:roles,id',
                 'ID_Pais' => 'nullable|integer|exists:countries,id',
             ],
@@ -180,36 +183,37 @@ class UserController extends Controller
         }*/
         $validator->validate();
         $user = User::find($id);
-        if(empty($user)){
+        if (empty($user)) {
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
 
-        if (($request->Correo_electronico == $user->Correo_electronico)|
-            ($request->Contrasenya == $user->Contrasenya)|
-            ($request->Fecha_Nacimiento == $user->Fecha_Nacimiento)|
-            ($request->Saldo_Moneda == $user->Saldo_Moneda)|
-            ($request->ID_Rol == $user->ID_Rol)|
-            ($request->ID_Pais == $user->ID_Pais)){
+        if (($request->Correo_electronico == $user->Correo_electronico) |
+            ($request->Contrasenya == $user->Contrasenya) |
+            ($request->Fecha_Nacimiento == $user->Fecha_Nacimiento) |
+            ($request->Saldo_Moneda == $user->Saldo_Moneda) |
+            ($request->ID_Rol == $user->ID_Rol) |
+            ($request->ID_Pais == $user->ID_Pais)
+        ) {
             return response()->json([
                 "message" => "Los datos ingresados son iguales a los actuales."
             ], 404);
         }
-        if (!empty($request->Correo_electronico)){
+        if (!empty($request->Correo_electronico)) {
             $user->Correo_electronico = $request->Correo_electronico;
         }
-        if (!empty($request->Contrasenya)){
+        if (!empty($request->Contrasenya)) {
             $user->Contrasenya = $request->Contrasenya;
         }
-        if (!empty($request->Fecha_Nacimiento)){
+        if (!empty($request->Fecha_Nacimiento)) {
             $user->Fecha_Nacimiento = $request->Fecha_Nacimiento;
         }
-        if (!empty($request->Saldo_Moneda)){
+        if (!empty($request->Saldo_Moneda)) {
             $user->Saldo_Moneda = $request->Saldo_Moneda;
         }
-        if (!empty($request->ID_Rol)){
+        if (!empty($request->ID_Rol)) {
             $user->ID_Rol = $request->ID_Rol;
         }
-        if (!empty($request->ID_Pais)){
+        if (!empty($request->ID_Pais)) {
             $user->ID_Pais = $request->ID_Pais;
         }
         $user->save();
@@ -226,7 +230,7 @@ class UserController extends Controller
     public function borrado($id)
     {
         $user = User::find($id);
-        if(empty($user) or $user->borrado == true){
+        if (empty($user) or $user->borrado == true) {
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $user->borrado = true;
@@ -246,7 +250,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if(empty($user)){
+        if (empty($user)) {
             return response()->json(['mensaje' => 'No se encuentra el id ingresado.']);
         }
         $user->delete();

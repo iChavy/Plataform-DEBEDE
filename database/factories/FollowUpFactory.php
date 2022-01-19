@@ -25,7 +25,7 @@ class FollowUpFactory extends Factory
         return [
             'ID_Usuario1' => User::all()->random()->id,
             'ID_Usuario2' => User::all()->random()->id,
-            'borrado' => $this->faker->boolean
+            'borrado' => $this->faker->randomElement($array = array('false'))
         ];
     }
 }

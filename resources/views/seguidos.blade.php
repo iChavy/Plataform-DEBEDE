@@ -17,11 +17,11 @@
         <div class="container ">
             <h4 class="mb-5">Usuarios seguidos:</h4>
             <div class="row text-center mb-4">
-                @foreach ($followups as $followup)
+                @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <p class="card-text">ID Usuario seguido: {{$followup->ID_Usuario2}}</p>
+                            <p class="card-text">ID Usuario seguido: {{$resultado->Correo_electronico}}</p>
                         </div>
                     </div>
                 </div>
