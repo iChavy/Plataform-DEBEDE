@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller; 
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Game;
 use App\Models\User;
@@ -17,50 +18,54 @@ class GameController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
-        if($request){
+    {
+        if ($request) {
             $agerestrictions = AgeRestriction::where('borrado', false)->get();
             $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
-            $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();  
+            $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
             if ($request) {
                 $Nombre = $request->get('buscarpor');
                 $Categoria = $request->get('buscarC');
-                //
-    
-                //
-                //
-    
+                $Desarrollador = $request->get('buscarD');
+                $PrecioMin = $request->get('buscarPmin');
+                $PrecioMax = $request->get('buscarPmax');
+
                 if ($Categoria) {
                     $games = Game::where('ID_Restriccion', 'like', "%$Categoria%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegos', ['games' => $games, 'buscarC' => $Categoria], compact('agerestrictions', 'users'));
                 }
-    
+
                 if ($Nombre) {
                     $games = Game::where('Nombre', 'like', "%$Nombre%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegos', ['games' => $games, 'buscarpor' => $Nombre], compact('agerestrictions', 'users'));
                 }
-    
-                //
-    
-                //
+
+                if ($Desarrollador) {
+                    $games = Game::where('ID_Usuario', 'like', "%$Desarrollador%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegos', ['games' => $games, 'buscarD' => $Desarrollador], compact('agerestrictions', 'users'));
+                }
+
+                if ($PrecioMin and $PrecioMax) {
+                    $games = Game::where('Precio', '>', "$PrecioMin")->where('Precio', '<', "$PrecioMax")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegos', ['games' => $games, 'buscarPmin' => $PrecioMin, 'buscarPmax' => $PrecioMax], compact('agerestrictions', 'users'));
+                }
             }
-    
+
             return view('juegos', compact('agerestrictions', 'users', 'games'));
         }
     }
 
-    
+
     public function vistaCarro($id)
     {
         $games = Game::find($id);
-        if(empty($games)){
+        if (empty($games)) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
-        return view('carro',compact('games'));
-
+        return view('carro', compact('games'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -120,7 +125,7 @@ class GameController extends Controller
             ]
         );
         //Caso falla la validación
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
 
@@ -135,7 +140,7 @@ class GameController extends Controller
         $newGame->borrado = false;
         $newGame->save();
 
-        return view('home');        
+        return view('home');
     }
 
     /**
@@ -144,10 +149,10 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) 
+    public function show($id)
     {
         $game = Game::find($id);
-        if(empty($game) or $game->borrado == true){
+        if (empty($game) or $game->borrado == true) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
@@ -212,60 +217,60 @@ class GameController extends Controller
 
         );
         //Caso falla la validación
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
 
         $game = Game::find($id);
-        if(empty($game)){
+        if (empty($game)) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
-        if (($request->ID_Restriccion == $game->ID_Restriccion)|
-            ($request->ID_Usuario == $game->ID_Usuario)|
-            ($request->Nombre == $game->Nombre)|
-            ($request->Numero_Ventas == $game->Numero_Ventas)|
-            ($request->Precio == $game->Precio)|
-            ($request->Link == $game->Link)|
-            ($request->Link_Demo == $game->Link_Demo)){
+        if (($request->ID_Restriccion == $game->ID_Restriccion) |
+            ($request->ID_Usuario == $game->ID_Usuario) |
+            ($request->Nombre == $game->Nombre) |
+            ($request->Numero_Ventas == $game->Numero_Ventas) |
+            ($request->Precio == $game->Precio) |
+            ($request->Link == $game->Link) |
+            ($request->Link_Demo == $game->Link_Demo)
+        ) {
             return response()->json([
                 "message" => "Los datos ingresados son iguales a los actuales."
             ], 404);
         }
 
-        if (!empty($request->ID_Restriccion)){
+        if (!empty($request->ID_Restriccion)) {
             $game->ID_Restriccion = $request->ID_Restriccion;
         }
-        if (!empty($request->ID_Usuario)){
+        if (!empty($request->ID_Usuario)) {
             $game->ID_Usuario = $request->ID_Usuario;
         }
-        if (!empty($request->Nombre)){
+        if (!empty($request->Nombre)) {
             $game->Nombre = $request->Nombre;
         }
-        if (!empty($request->Numero_Ventas)){
+        if (!empty($request->Numero_Ventas)) {
             $game->Numero_Ventas = $request->Numero_Ventas;
         }
-        if (!empty($request->Precio)){
+        if (!empty($request->Precio)) {
             $game->Precio = $request->Precio;
         }
-        if (!empty($request->Link)){
+        if (!empty($request->Link)) {
             $game->Link = $request->Link;
         }
-        if (!empty($request->Link_Demo)){
+        if (!empty($request->Link_Demo)) {
             $game->Link_Demo = $request->Link_Demo;
         }
         $game->save();
         return response()->json([
             'msg' => 'El juego ha sido modificado.',
             'id' => $game->id,
-        ], 200);     
-        
+        ], 200);
     }
 
     public function borrado($id)
     {
         $game = Game::find($id);
-        if(empty($game) or $game->borrado == true){
+        if (empty($game) or $game->borrado == true) {
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
         $game->borrado = true;
@@ -275,11 +280,11 @@ class GameController extends Controller
             'id' => $game->id,
         ], 200);
     }
-    
+
     public function destroy($id)
     {
         $game = Game::find($id);
-        if(empty($game)){
+        if (empty($game)) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
         $game->delete();

@@ -23,7 +23,13 @@
                 <button class="btn btn-primary" type="submit">Filtrar</button>
             </form>
             <br>
-            <!-- -->
+            Filtrar por rango de precio:
+            <form class="d-flex">
+                <input name="buscarPmin" class="form-control mr-sm-2" type="search" placeholder="Ingrese precio minimo" aria-label="Search">
+                <input name="buscarPmax" class="form-control mr-sm-2" type="search" placeholder="Ingrese precio maximo" aria-label="Search">
+                <button class="btn btn-primary" type="submit">Filtrar</button>
+            </form>
+            <br>
 
             Filtrar por categoría:
             <form class="d-flex">
@@ -38,7 +44,18 @@
             </form>
             <br>
 
-            <!-- -->
+            Filtrar por desarrollador:
+            <form class="d-flex">
+                <label for="ID_Usuario" class="form-label"></label>
+                <select name="buscarD" class="form-select mb-4" type="search" aria-label="Search" name="ID_Usuario" id="ID_Usuario">
+                    @foreach ($users as $user)
+                    <option value="{{$user->id}}">{{$user->Correo_electronico}}</option>
+                    @endforeach
+
+                </select>
+                
+            </form>
+            <button class="btn btn-primary" type="submit">Filtrar</button>
 
             <br>
         </div>
