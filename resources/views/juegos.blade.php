@@ -53,9 +53,8 @@
                     @endforeach
 
                 </select>
-                
+                <button class="btn btn-primary" type="submit">Filtrar</button>
             </form>
-            <button class="btn btn-primary" type="submit">Filtrar</button>
 
             <br>
         </div>
