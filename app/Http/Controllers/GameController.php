@@ -93,6 +93,45 @@ class GameController extends Controller
         }
     }
 
+    public function indexAdmin(Request $request)
+    {
+        if ($request) {
+            $agerestrictions = AgeRestriction::where('borrado', false)->get();
+            $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
+            $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+            if ($request) {
+                $Nombre = $request->get('buscarpor');
+                $Categoria = $request->get('buscarC');
+                $Desarrollador = $request->get('buscarD');
+                $PrecioMin = $request->get('buscarPmin');
+                $PrecioMax = $request->get('buscarPmax');
+ 
+                if ($Categoria) {
+                    $games = Game::where('ID_Restriccion', 'like', "%$Categoria%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegosAdmin', ['games' => $games, 'buscarC' => $Categoria], compact('agerestrictions', 'users'));
+                }
+ 
+                if ($Nombre) {
+                    $games = Game::where('Nombre', 'like', "%$Nombre%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegosAdmin', ['games' => $games, 'buscarpor' => $Nombre], compact('agerestrictions', 'users'));
+                }
+ 
+                if ($Desarrollador) {
+                    $games = Game::where('ID_Usuario', 'like', "%$Desarrollador%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegosAdmin', ['games' => $games, 'buscarD' => $Desarrollador], compact('agerestrictions', 'users'));
+                }
+ 
+                if ($PrecioMin and $PrecioMax) {
+                    $games = Game::where('Precio', '>', "$PrecioMin")->where('Precio', '<', "$PrecioMax")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegosAdmin', ['games' => $games, 'buscarPmin' => $PrecioMin, 'buscarPmax' => $PrecioMax], compact('agerestrictions', 'users'));
+                }
+            }
+ 
+            return view('juegosAdmin', compact('agerestrictions', 'users', 'games'));
+        }
+    }
+
+
     public function vistaCarro($id)
     {
         $games = Game::find($id);
@@ -103,12 +142,23 @@ class GameController extends Controller
         return view('carro', compact('games'));
     }
 
-    public function edit(Game $game)
+    public function vistaJuegoAd($id)
     {
-        $agerestrictions = AgeRestriction::where('borrado',false)->get();
-        return view('modificarJuego', compact('game','agerestrictions')); //no borrar
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
+        $games = Game::find($id);
+        if (empty($games)) {
+            return response()->json(['mensaje' => 'El ID ingresado no existe']);
+        }
+
+        return view('modificarJuego', compact('games', 'agerestrictions'));
     }
 
+    // vista scroll bar restriccion de edad
+    public function edit(Game $game)
+    {
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
+        return view('modificarJuego', compact('game', 'agerestrictions'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -262,19 +312,6 @@ class GameController extends Controller
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
-        if (($request->ID_Restriccion == $game->ID_Restriccion) |
-            ($request->ID_Usuario == $game->ID_Usuario) |
-            ($request->Nombre == $game->Nombre) |
-            ($request->Numero_Ventas == $game->Numero_Ventas) |
-            ($request->Precio == $game->Precio) |
-            ($request->Link == $game->Link) |
-            ($request->Link_Demo == $game->Link_Demo)
-        ) {
-            return response()->json([
-                "message" => "Los datos ingresados son iguales a los actuales."
-            ], 404);
-        }
-
         if (!empty($request->ID_Restriccion)) {
             $game->ID_Restriccion = $request->ID_Restriccion;
         }
@@ -297,8 +334,10 @@ class GameController extends Controller
             $game->Link_Demo = $request->Link_Demo;
         }
         $game->save();
-        $games = Game::all();
-        return view('home',compact('users'));
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
+        $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
+        $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+        return view('/juegosAdmin', compact('users', 'agerestrictions', 'games'));
         /*
         return response()->json([
             'msg' => 'El juego ha sido modificado.',

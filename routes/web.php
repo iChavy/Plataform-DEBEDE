@@ -51,7 +51,16 @@ Route::get('/modificarUser', function () {
 Route::get('/modificarUser', 'UserController@edit'); //error dos parámetros
 Route::put('/modificarUser', 'UserController@update');
 
+//ADMIN juegos
+Route::get('/juegosAdmin', function () {
+    return view('juegosAdmin');
+});
+Route::get('/juegosAdmin', 'GameController@indexAdmin');
 
+//Modificar Juego
+Route::get('/modificarJuego', function () {
+    return view('modificarJuego');
+});
 
 //Login
 Route::get('/login', function () {
@@ -254,9 +263,13 @@ Route::get('/game/vistacarro/{id}', 'GameController@vistaCarro');
 
 Route::get('/games', 'GameController@indexInicio'); 
 
+//Route::get('/game/edit/{id}', 'GameController@indexAdmin'); 
+
+Route::get('/game/vistaJuegoAd/{id}', 'GameController@vistaJuegoAd');
+
 Route::get('/games', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
 Route::post('/game/create', 'GameController@store');
-Route::put('/game/update/{id}', 'GameController@update');
+Route::put('/game/vistaJuegoAd/{id}', 'GameController@update');
 Route::put('/game/borrar/{id}', 'GameController@borrado');
 Route::delete('/game/delete/{id}', 'GameController@destroy');
