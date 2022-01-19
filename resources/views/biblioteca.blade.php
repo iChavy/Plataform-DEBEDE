@@ -13,15 +13,16 @@
 
 <body>
     @include('includes.navbar')
-        <section class="mt-5">
+    <section class="mt-5">
         <div class="container ">
             <h4 class="mb-5">Biblioteca</h4>
             <div class="row text-center mb-4">
-                @foreach ($libraries as $library)
+                @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <p class="card-text">ID_ Juego: {{$library->Codigo_Juego}}</p>
+                            <p class="card-text">ID de juego: {{$resultado->Codigo_Juego}}</p>
+                            <p class="card-text">Nombre: {{$resultado->Nombre}}</p>
                         </div>
                     </div>
                 </div>

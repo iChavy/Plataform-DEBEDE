@@ -133,11 +133,11 @@ class GameController extends Controller
     }
     public function indexBiblioteca($id)
     {
-        $libraries = Library::where('ID_Usuario', $id)->where('borrado', false)->get();
-        //$juegos = $libraries->Codigo_Juego;
-        //$games = Game::where('Codigo_Juego', $juegos)->where('borrado', false)->get();
+        $resultados = Game::join("libraries", "libraries.Codigo_Juego", "=", "games.id")
+            ->select("libraries.Codigo_Juego", "games.Nombre", "libraries.ID_Usuario")->where('libraries.ID_Usuario', $id)
+            ->get();
 
-        return view('biblioteca', compact('libraries'));
+        return view('biblioteca', compact('resultados'));
     }
 
     public function vistaCarro($id)

@@ -21,7 +21,7 @@
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <p class="card-text">ID Usuario seguido: {{$resultado->Correo_electronico}}</p>
+                            <p class="card-text">Usuario: {{$resultado->Correo_electronico}}</p>
                         </div>
                     </div>
                 </div>
