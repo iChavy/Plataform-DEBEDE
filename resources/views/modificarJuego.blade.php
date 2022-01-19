@@ -47,7 +47,9 @@
                         <div class="d-grid gap-2 col-6 mx-auto">
                             <button type="submit" class="btn btn-primary mb-5">Realizar cambios</button>
                         </div>
-
+                        
+                    </form>
+                    
                 </div>
             </div>
         </div>

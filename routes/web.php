@@ -62,6 +62,11 @@ Route::get('/modificarJuego', function () {
     return view('modificarJuego');
 });
 
+//Eliminar Juego
+Route::get('/eliminarJuego', function () {
+    return view('eliminarJuego');
+});
+
 //Login
 Route::get('/login', function () {
     return view('login');
@@ -267,9 +272,11 @@ Route::get('/games', 'GameController@indexInicio');
 
 Route::get('/game/vistaJuegoAd/{id}', 'GameController@vistaJuegoAd');
 
+Route::get('/game/vistaEliminar/{id}', 'GameController@vistaEliminar'); ///////////////
+
 Route::get('/games', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
 Route::post('/game/create', 'GameController@store');
 Route::put('/game/vistaJuegoAd/{id}', 'GameController@update');
-Route::put('/game/borrar/{id}', 'GameController@borrado');
+Route::put('/game/vistaEliminar/{id}', 'GameController@borrado');
 Route::delete('/game/delete/{id}', 'GameController@destroy');

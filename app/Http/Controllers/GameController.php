@@ -353,10 +353,10 @@ class GameController extends Controller
         }
         $game->borrado = true;
         $game->save();
-        return response()->json([
-            'msg' => 'El juego ha sido eliminado (soft)',
-            'id' => $game->id,
-        ], 200);
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
+        $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
+        $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+        return view('/juegosAdmin', compact('users', 'agerestrictions', 'games'));
     }
 
     public function destroy($id)
@@ -370,5 +370,15 @@ class GameController extends Controller
             'mensaje' => 'El método de pago de usuario ha sido eliminado',
             'id' => $game->id,
         ], 200);
+    }
+
+    public function vistaEliminar($id)
+    {
+        $games = Game::find($id);
+        if (empty($games)) {
+            return response()->json(['mensaje' => 'El ID ingresado no existe']);
+        }
+
+        return view('eliminarJuego', compact('games'));
     }
 }

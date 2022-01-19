@@ -72,7 +72,7 @@
                             <p class="card-text">Precio: ${{$game->Precio}}</p>
                             <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-primary">Comprar</a>
                             <a href="/game/vistaJuegoAd/{{ $game->id }}" class="btn btn-primary">Editar</a>
-                            <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-primary">Borrar</a>
+                            <a href="/game/vistaEliminar/{{ $game->id }}" class="btn btn-primary">Borrar</a>
                         </div>
                     </div>
                 </div>
