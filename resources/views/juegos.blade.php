@@ -13,12 +13,36 @@
 
 <body>
     @include('includes.navbar')
-    <nav class="navbar navbar-light bg-light">
-        <form class="d-flex">
-            <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por título" aria-label="Search">
-            <button class="btn btn-primary" type="submit">Filtrar</button>
-        </form>
-    </nav>
+    <ul class="nav justify-content-center">
+
+        <br>
+        <div class="col-md-4">
+            Filtrar por título:
+            <form class="d-flex">
+                <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Ingrese un título" aria-label="Search">
+                <button class="btn btn-primary" type="submit">Filtrar</button>
+            </form>
+            <br>
+            <!-- -->
+
+            Filtrar por categoría:
+            <form class="d-flex">
+                <label for="ID_Restriccion" class="form-label"></label>
+                <select name="buscarC" class="form-select mb-4" type="search" aria-label="Search" name="ID_Restriccion" id="ID_Restriccion">
+                    @foreach ($agerestrictions as $agerestriction)
+                    <option value="{{$agerestriction->id}}">{{$agerestriction->Tipo_restriccion}}</option>
+                    @endforeach
+
+                </select>
+                <button class="btn btn-primary" type="submit">Filtrar</button>
+            </form>
+            <br>
+
+            <!-- -->
+
+            <br>
+        </div>
+    </ul>
 
     <section class="mt-5">
         <div class="container ">

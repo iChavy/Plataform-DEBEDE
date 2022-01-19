@@ -14,7 +14,7 @@ class LoginController extends Controller
         }
         if($request->Contrasenya == $user->Contrasenya){
             setcookie('user', $user->Correo_electronico); 
-            //setcookie('user', $user->id);// PROBAR CON DOMINIO
+            setcookie('id', $user->id);// PROBAR CON DOMINIO
             return (redirect()->to('/home'));
         }
         return redirect()->to('/login');
@@ -23,6 +23,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         setcookie('user', '', time()-1);
+        setcookie('id', '', time()-1);
         return redirect()->to('/home');
     } 
 

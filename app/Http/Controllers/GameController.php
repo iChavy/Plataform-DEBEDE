@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller; 
 
 use App\Models\Game;
+use App\Models\User;
+use App\Models\AgeRestriction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,23 +19,37 @@ class GameController extends Controller
     public function index(Request $request)
     {   
         if($request){
-            $Nombre = $request->get('buscarpor');
-            $games = Game::where('Nombre', 'like', "%$Nombre%")->orderBy('Numero_Ventas', 'asc')->get();  
+            $agerestrictions = AgeRestriction::where('borrado', false)->get();
+            $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
+            $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();  
+            if ($request) {
+                $Nombre = $request->get('buscarpor');
+                $Categoria = $request->get('buscarC');
+                //
+    
+                //
+                //
+    
+                if ($Categoria) {
+                    $games = Game::where('ID_Restriccion', 'like', "%$Categoria%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegos', ['games' => $games, 'buscarC' => $Categoria], compact('agerestrictions', 'users'));
+                }
+    
+                if ($Nombre) {
+                    $games = Game::where('Nombre', 'like', "%$Nombre%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
+                    return view('juegos', ['games' => $games, 'buscarpor' => $Nombre], compact('agerestrictions', 'users'));
+                }
+    
+                //
+    
+                //
+            }
+    
+            return view('juegos', compact('agerestrictions', 'users', 'games'));
         }
-        
-        return view('juegos',['games' => $games, 'buscarpor' => $Nombre]);
     }
 
-    public function index2()
-    {   
-        $games = Game::where('borrado',false)->get();
-        if($games->isEmpty()){
-            return response()->json([
-                'respuesta' => 'No se encuentran juegos']);
-        }
-        return view('juegos',compact('games'));
-    }
-
+    
     public function vistaCarro($id)
     {
         $games = Game::find($id);

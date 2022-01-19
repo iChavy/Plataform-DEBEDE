@@ -36,8 +36,7 @@ Route::get('/juegos', function () {
 Route::get('/crearJuego', function () {
     return view('crearJuego');
 });
-Route::get('/juegos', 'GameController@index');
-//Route::get('/juegos', 'GameController@index2'); 
+Route::get('/juegos', 'GameController@index'); Route::get('/juegos', 'GameController@index');  //filtro nombre, ranking y no borrados
 //Route::get('/juegos', 'AgeRestrictionController@index'); 
 
 Route::get('/crearJuego', 'AgeRestrictionController@index2');
@@ -245,7 +244,6 @@ Route::delete('/user/delete/{id}', 'UserController@destroy');
 Route::get('/game/vistacarro/{id}', 'GameController@vistaCarro');
 
 Route::get('/games', 'GameController@index');
-Route::get('/games/index2', 'GameController@index2');
 Route::get('/game/{id}', 'GameController@show');
 Route::post('/game/create', 'GameController@store');
 Route::put('/game/update/{id}', 'GameController@update');
