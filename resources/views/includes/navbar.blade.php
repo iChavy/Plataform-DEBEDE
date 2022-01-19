@@ -17,7 +17,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">LOG IN</a>
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
                     </li>
                 </ul>
 
@@ -29,6 +29,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/juegos">Juegos</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
                     </li>
@@ -36,18 +41,14 @@
                         <a class="nav-link active" aria-current="page" href="/seguidos/{{$_COOKIE['id']}}">Seguidos</a>
                     </li>
                 </ul>
-                
+
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/user/vistaUser/{{$_COOKIE['id']}}">Perfil: {{$_COOKIE['user']}}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/logout">LOG OUT</a>
+                        <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
                     </li>
                 </ul>
 
@@ -57,6 +58,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/juegos">Juegos</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
                     </li>
@@ -73,7 +79,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/logout">LOG OUT</a>
+                        <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
                     </li>
                 </ul>
 
@@ -84,8 +90,12 @@
                 </li>
 
                 <li class="nav-item">
-                        <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
-                    </li>
+                    <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/modificarJuego">Modificar Juego</a>
@@ -95,8 +105,8 @@
                     <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/seguidos/{{$_COOKIE['id']}}">Seguidos</a>
-                    </li>
+                    <a class="nav-link active" aria-current="page" href="/seguidos/{{$_COOKIE['id']}}">Seguidos</a>
+                </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
@@ -105,7 +115,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/logout">LOG OUT</a>
+                        <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
                     </li>
                 </ul>
                 @endif
@@ -120,7 +130,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">LOG IN</a>
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
                     </li>
                 </ul>
                 @endif
