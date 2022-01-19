@@ -98,10 +98,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/modificarJuego">Modificar Juego</a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
                 </li>
                 <li class="nav-item">

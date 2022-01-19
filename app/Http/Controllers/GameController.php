@@ -311,9 +311,11 @@ class GameController extends Controller
 
         );
         //Caso falla la validación
-        if ($validator->fails()) {
+        $validator->validate();
+
+        /*if ($validator->fails()) {
             return response($validator->errors(), 400);
-        }
+        }*/
 
         $game = Game::find($id);
         if (empty($game)) {
