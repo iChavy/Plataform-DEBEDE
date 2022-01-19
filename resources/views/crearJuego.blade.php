@@ -30,13 +30,7 @@
                         </div>
 
                         <!-- USUARIO CONECTADO DESARROLLADOR -->
-                        <div class="mb-3">
-                            <label for="ID_Usuario" class="form-label">Desarrollador</label>
-                            <input type="integer" class="form-control @error('ID_Usuario') is-invalid @enderror" id="name" name="ID_Usuario" value="">
-                            @error('ID_Usuario')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="Nombre" class="form-label">Nombre del juego</label>
                             <input type="text" placeholder="Ingrese el nombre del juego" class="form-control @error('Nombre') is-invalid @enderror" id="name" name="Nombre" value="">

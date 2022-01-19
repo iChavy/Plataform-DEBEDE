@@ -176,13 +176,13 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id) //request, id_user
     {
         $validator = Validator::make(
             $request->all(),
             [
                 'ID_Restriccion' => 'required|integer|exists:age_restrictions,id',
-                'ID_Usuario' => 'nullable|integer|exists:users,id',
+                //'ID_Usuario' => 'nullable|integer|exists:users,id',
                 'Nombre' => 'required|min:2|max:100|unique:games',
                 'Precio' => 'required|integer|min:5000|max:70000',
                 'Link' => 'required|url|unique:games',
@@ -193,9 +193,9 @@ class GameController extends Controller
                 'ID_Restriccion.integer' => 'Debe ser un entero',
                 'ID_Restriccion.exists' => 'El ID del método ingresado no existe',
 
-                'ID_Usuario.required' => 'Se debe ingresar el ID del usuario',
-                'ID_Usuario.integer' => 'Debe ser un entero',
-                'ID_Usuario.exists' => 'El ID de usuario ingresado no existe',
+                //'ID_Usuario.required' => 'Se debe ingresar el ID del usuario',
+                //'ID_Usuario.integer' => 'Debe ser un entero',
+                //'ID_Usuario.exists' => 'El ID de usuario ingresado no existe',
 
                 'Nombre.unique' => 'El juego ya existe',
                 'Nombre.required' => 'Se debe ingresar el nombre del juego',
@@ -226,7 +226,7 @@ class GameController extends Controller
 
         $newGame = new Game();
         $newGame->ID_Restriccion = $request->ID_Restriccion;
-        $newGame->ID_Usuario = $request->ID_Usuario;
+        $newGame->ID_Usuario = $id;
         $newGame->Nombre = $request->Nombre;
         $newGame->Numero_Ventas = 0;
         $newGame->Precio = $request->Precio;
@@ -235,7 +235,7 @@ class GameController extends Controller
         $newGame->borrado = false;
         $newGame->save();
 
-        return view('home');
+        return view('/crearJuego');
     }
 
     /**

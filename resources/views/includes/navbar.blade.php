@@ -24,7 +24,7 @@
                 @elseif(isset($_COOKIE['user']))
                 <!-- == 1, ==2, desaroolador-->
                 <!-- CLIENTE -->
-                @if(isset($_COOKIE['rol']) === 1)
+                @if(($_COOKIE['rol']) == 1)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/juegos">Juegos</a>
@@ -44,16 +44,16 @@
                 </ul>
 
                 <!-- DESAROLLADOR -->
-                @elseif(isset($_COOKIE['rol']) === 2)
+                @elseif(($_COOKIE['rol']) == 2)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/juegos">Juegos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/crearJuego">Crear Juego</a>
+                        <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/modificarJuego">Modificar Juego</a>
+                        <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -73,8 +73,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/crearJuego">Crear Juego</a>
-                </li>
+                        <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
+                    </li>
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/modificarJuego">Modificar Juego</a>

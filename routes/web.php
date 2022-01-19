@@ -81,6 +81,8 @@ Route::get('/tarjeta', 'PaymentMethodController@index');
 Route::get('/modificarJuego', 'GameController@edit');
 Route::put('/modificarJuego', 'GameController@update');
 
+//CrearJuego
+
 
 // Bank
 Route::get('/banks', 'BankController@index');
@@ -272,11 +274,11 @@ Route::get('/games', 'GameController@indexInicio');
 
 Route::get('/game/vistaJuegoAd/{id}', 'GameController@vistaJuegoAd');
 
-Route::get('/game/vistaEliminar/{id}', 'GameController@vistaEliminar'); ///////////////
+Route::get('/game/vistaEliminar/{id}', 'GameController@vistaEliminar');
 
 Route::get('/games', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
-Route::post('/game/create', 'GameController@store');
+Route::post('/game/crearJuego/{id}', 'GameController@store');
 Route::put('/game/vistaJuegoAd/{id}', 'GameController@update');
 Route::put('/game/vistaEliminar/{id}', 'GameController@borrado');
 Route::delete('/game/delete/{id}', 'GameController@destroy');
