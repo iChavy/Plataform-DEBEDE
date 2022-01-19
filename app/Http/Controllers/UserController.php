@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\AgeRestriction;
 use App\Models\Game;
 use App\Models\Country;
+use App\Models\FollowUp;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +27,14 @@ class UserController extends Controller
                 'respuesta' => 'No se encuentran usuarios.']);
         }
         return response($users, 200);
+    }
+
+    public function indexSeguidos($id)
+    {
+        $followups = FollowUp::where('ID_Usuario1', $id)->where('borrado', false)->get();
+        
+
+        return view('seguidos', compact('followups'));
     }
 
     /**

@@ -32,6 +32,9 @@ Route::get('/signup', 'CountryController@index');
 //Biblioteca
 Route::get('/biblioteca/{id}', 'GameController@indexBiblioteca'); 
 
+// Seguidos
+Route::get('/seguidos/{id}', 'UserController@indexSeguidos'); 
+
 //Juegos
 Route::get('/juegos', function () {
     return view('juegos');
