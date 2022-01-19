@@ -39,6 +39,10 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/logout">LOG OUT</a>
                     </li>
                 </ul>

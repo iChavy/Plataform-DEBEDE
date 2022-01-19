@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\AgeRestriction;
 use App\Models\Game;
 use App\Models\Country;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -114,11 +115,13 @@ class UserController extends Controller
     public function vistaUser($id)
     {
         $users = User::find($id);
+        $countries = Country::find($users->ID_Pais);
+        $roles = Role::find($users->ID_Rol);
         if (empty($users)) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
-        return view('home', compact('users'));
+        return view('home', compact('users', 'countries', 'roles'));
     }
 
     /**

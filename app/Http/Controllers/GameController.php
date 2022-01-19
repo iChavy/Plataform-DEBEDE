@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\AgeRestriction;
+use App\Models\Library;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -105,32 +106,39 @@ class GameController extends Controller
                 $Desarrollador = $request->get('buscarD');
                 $PrecioMin = $request->get('buscarPmin');
                 $PrecioMax = $request->get('buscarPmax');
- 
+
                 if ($Categoria) {
                     $games = Game::where('ID_Restriccion', 'like', "%$Categoria%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegosAdmin', ['games' => $games, 'buscarC' => $Categoria], compact('agerestrictions', 'users'));
                 }
- 
+
                 if ($Nombre) {
                     $games = Game::where('Nombre', 'like', "%$Nombre%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegosAdmin', ['games' => $games, 'buscarpor' => $Nombre], compact('agerestrictions', 'users'));
                 }
- 
+
                 if ($Desarrollador) {
                     $games = Game::where('ID_Usuario', 'like', "%$Desarrollador%")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegosAdmin', ['games' => $games, 'buscarD' => $Desarrollador], compact('agerestrictions', 'users'));
                 }
- 
+
                 if ($PrecioMin and $PrecioMax) {
                     $games = Game::where('Precio', '>', "$PrecioMin")->where('Precio', '<', "$PrecioMax")->where('borrado', false)->orderBy('Numero_Ventas', 'asc')->get();
                     return view('juegosAdmin', ['games' => $games, 'buscarPmin' => $PrecioMin, 'buscarPmax' => $PrecioMax], compact('agerestrictions', 'users'));
                 }
             }
- 
+
             return view('juegosAdmin', compact('agerestrictions', 'users', 'games'));
         }
     }
+    public function indexBiblioteca($id)
+    {
+        $libraries = Library::where('ID_Usuario', $id)->where('borrado', false)->get();
+        //$juegos = $libraries->Codigo_Juego;
+        //$games = Game::where('Codigo_Juego', $juegos)->where('borrado', false)->get();
 
+        return view('biblioteca', compact('libraries'));
+    }
 
     public function vistaCarro($id)
     {

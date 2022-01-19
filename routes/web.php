@@ -29,6 +29,9 @@ Route::get('/signup', function () {
 });
 Route::get('/signup', 'CountryController@index');
 
+//Biblioteca
+Route::get('/biblioteca/{id}', 'GameController@indexBiblioteca'); 
+
 //Juegos
 Route::get('/juegos', function () {
     return view('juegos');
