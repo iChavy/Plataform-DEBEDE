@@ -34,7 +34,9 @@ class GameFactory extends Factory
             'Link_Demo' => $this->faker->unique()->url,
             'ID_Usuario' => User::all()->random()->id,
             'ID_Restriccion' => AgeRestriction::all()->random()->id,
-            'borrado' => $this->faker->boolean
+            'borrado' => $this->faker->boolean,
+            'imagen'=> $this->faker->imageUrl($width = 640, $height = 480),
+            'Descripcion' => $this->faker->unique()->text($maxNbChars = 50)
 
         ];
     }

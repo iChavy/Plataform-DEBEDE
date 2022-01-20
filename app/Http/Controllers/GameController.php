@@ -134,7 +134,7 @@ class GameController extends Controller
     public function indexBiblioteca($id)
     {
         $resultados = Game::join("libraries", "libraries.Codigo_Juego", "=", "games.id")
-            ->select("libraries.Codigo_Juego", "games.Nombre", "libraries.ID_Usuario")->where('libraries.ID_Usuario', $id)
+            ->select("libraries.Codigo_Juego", "games.Nombre", "libraries.ID_Usuario", "games.Descripcion", "games.imagen")->where('libraries.ID_Usuario', $id)
             ->get();
 
         return view('biblioteca', compact('resultados'));
@@ -195,6 +195,8 @@ class GameController extends Controller
                 'Precio' => 'required|integer|min:5000|max:70000',
                 'Link' => 'required|url|unique:games',
                 'Link_Demo' => 'required|url|unique:games',
+                'imagen' => 'required|min:2|max:255',
+                'Descripcion' => 'required|min:2|max:50',
             ],
             [
                 'ID_Restriccion.required' => 'Se debe ingresar el ID de la restricción',
@@ -223,6 +225,14 @@ class GameController extends Controller
                 'Link_Demo.unique' => 'El link está asociado a otro juego o demo',
                 'Link_Demo.required' => 'Se debe ingresar el link del demo del juego',
                 'Link_Demo.url' => 'Debe ser un link',
+
+                'imagen.required' => 'Debes ingresar un link de imagen',
+                'imagen.min' => 'Debe ser de largo mínimo :min',
+                'imagen.max' => 'Debe ser de largo máximo :max',
+
+                'Descripcion.required' => 'Se debe la descripción del juego',
+                'Descripcion.min' => 'Debe ser de largo mínimo :min',
+                'Descripcion.max' => 'Debe ser de largo máximo :max',
             ]
         );
 
@@ -241,6 +251,8 @@ class GameController extends Controller
         $newGame->Link = $request->Link;
         $newGame->Link_Demo = $request->Link_Demo;
         $newGame->borrado = false;
+        $newGame->imagen = $request->imagen;
+        $newGame->Descripcion = $request->Descripcion;
         $newGame->save();
 
         return view('/crearJuego');
@@ -283,6 +295,8 @@ class GameController extends Controller
                 'Precio' => 'nullable|integer|min:5000|max:70000',
                 'Link' => 'nullable|url|unique:games',
                 'Link_Demo' => 'nullable|url|unique:games',
+                'imagen' => 'nullable|min:2|max:255',
+                'Descripcion' => 'nullable|min:2|max:50',
             ],
             [
                 'ID_Usuario.integer' => 'Debe ser un entero',
@@ -306,6 +320,12 @@ class GameController extends Controller
 
                 'Link_Demo.unique' => 'El link está asociado a otro juego o demo',
                 'Link_Demo.url' => 'Debe ser un link',
+
+                'imagen.min' => 'Debe ser de largo mínimo :min',
+                'imagen.max' => 'Debe ser de largo máximo :max',
+
+                'Descripcion.min' => 'Debe ser de largo mínimo :min',
+                'Descripcion.max' => 'Debe ser de largo máximo :max',
             ]
 
 
@@ -342,6 +362,14 @@ class GameController extends Controller
         }
         if (!empty($request->Link_Demo)) {
             $game->Link_Demo = $request->Link_Demo;
+        }
+
+        if (!empty($request->imagen)) {
+            $game->imagen = $request->imagen;
+        }
+
+        if (!empty($request->Descripcion)) {
+            $game->Descripcion = $request->Descripcion;
         }
         $game->save();
         $agerestrictions = AgeRestriction::where('borrado', false)->get();

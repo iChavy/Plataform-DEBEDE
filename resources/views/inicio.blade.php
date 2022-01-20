@@ -69,9 +69,10 @@
                 @foreach ($games as $game)
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
+                        <img src="{{$game->imagen}}" class="card-img-top" alt="Imagen de curso">
                         <div class="card-body">
                             <h5 class="card-title">Nombre: {{$game->Nombre}}</h5>
-                            <p class="card-text">DESCRIPCIÓN: </p>
+                            <p class="card-text">Descripción: {{$game->Descripcion}}</p>
                             <p class="card-text">Precio: ${{$game->Precio}}</p>
                             <p class="card-text">Número de ventas: {{$game->Numero_Ventas}}</p>
                         </div>

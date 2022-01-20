@@ -36,6 +36,14 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="Descripcion" class="form-label">Descripción:</label>
+                            <input type="text" class="form-control @error('Descripcion') is-invalid @enderror" id="name" name="Descripcion" value="">
+                            @error('Descripcion')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="ID_Restriccion" class="form-label">Restricción de edad</label>
                             <select class="form-select mb-4" aria-label="Seleccione un tipo de restricción de edad:" name="ID_Restriccion" id="ID_Restriccion">
                                 @foreach ($agerestrictions as $agerestriction)

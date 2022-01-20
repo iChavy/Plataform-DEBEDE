@@ -25,6 +25,8 @@ class CreateGamesTable extends Migration
             $table->unsignedBigInteger('ID_Usuario')->nullable();
             $table->foreign('ID_Usuario')->references('id')->on('users');
             $table->boolean("borrado");
+            $table->text('imagen');
+            $table->text('Descripcion');
             $table->timestamps();
         });
     }

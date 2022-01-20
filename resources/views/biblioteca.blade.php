@@ -19,10 +19,12 @@
             <div class="row text-center mb-4">
                 @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">
+                    <img src="{{$resultado->imagen}}" class="card-img-top" alt="Imagen de curso">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <p class="card-text">ID de juego: {{$resultado->Codigo_Juego}}</p>
                             <p class="card-text">Nombre: {{$resultado->Nombre}}</p>
+                            <p class="card-text">Descripción: {{$resultado->Descripcion}}</p>
                         </div>
                     </div>
                 </div>
