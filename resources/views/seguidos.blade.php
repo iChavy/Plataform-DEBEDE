@@ -15,13 +15,13 @@
     @include('includes.navbar')
         <section class="mt-5">
         <div class="container ">
-            <h4 class="mb-5">Usuarios seguidos:</h4>
+            <h4 class="mb-5 text-center">Usuarios seguidos</h4>
             <div class="row text-center mb-4">
                 @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card text-white bg-dark mb-3" style="width: 20rem;">
                         <div class="card-body">
-                            <p class="card-text">Usuario: {{$resultado->Correo_electronico}}</p>
+                            <p class="card-text"><strong>Usuario: </strong>{{$resultado->Correo_electronico}}</p>
                         </div>
                     </div>
                 </div>

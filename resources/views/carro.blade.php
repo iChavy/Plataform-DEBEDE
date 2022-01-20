@@ -16,7 +16,8 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-3">Carro de compras</h4>
+                <div class="position-absolute top-50 start-50 translate-middle">
+                    <h4 class="mb-3 text-center">Carro de compras</h4>
                     <form action="" method='POST'>
                         <fieldset disabled>
                             <samp>Nombre: {{$games->Nombre}}</samp>
@@ -24,15 +25,17 @@
                         <fieldset disabled>
                             <samp>Precio: ${{$games->Precio}}</samp>
                         </fieldset>
-                        <a href="/tarjeta" class="btn btn-primary">Pagar con tarjeta</a>
+                        <br>
+                        <a href="/tarjeta" class="btn btn-primary ">Pagar con tarjeta</a>
                         <a href="/moneda" class="btn btn-primary">Pagar con moneda</a>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
         </div>
     </section>
-    @include('includes.footer')
+    @include('includes.footerFinal')
 </body>
 
 </html>

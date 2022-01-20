@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-light">
 
         <div class="container-fluid">
 
@@ -11,8 +11,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                @if(!isset($_COOKIE['user']))
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @if(!isset($_COOKIE['user']))
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/inicio">Inicio</a>
                     </li>
@@ -32,7 +33,7 @@
                 @if(($_COOKIE['rol']) == 1)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
+                        <a class="nav-link active" aria-current="page" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
                     </li>
 
                     <li class="nav-item">
@@ -61,7 +62,7 @@
                 @elseif(($_COOKIE['rol']) == 2)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
+                        <a class="nav-link active" aria-current="page" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
                     </li>
 
                     <li class="nav-item">
@@ -69,7 +70,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/crearJuego">Crear Juego</a>
+                        <a class="nav-link active" aria-current="page" href="/crearJuego">Crear Juego</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
@@ -90,24 +91,25 @@
 
                 <!-- ADMINISTRADOR -->
                 @else
-                <li class="nav-item">
-                    <a class="nav-link" href="/juegosAdmin">Juegos</a>
-                </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/juegosAdmin">Juegos</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/biblioteca/{{$_COOKIE['id']}}">Biblioteca</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/crearJuego">Crear Juego</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/crearJuego">Crear Juego</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/seguidos/{{$_COOKIE['id']}}">Seguidos</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/seguidos/{{$_COOKIE['id']}}">Seguidos</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

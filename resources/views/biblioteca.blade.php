@@ -15,7 +15,7 @@
     @include('includes.navbar')
     <section class="mt-5">
         <div class="container ">
-            <h4 class="mb-5">Biblioteca</h4>
+            <h4 class="mb-5 text-center">Biblioteca</h4>
             <div class="row text-center mb-4">
                 @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">

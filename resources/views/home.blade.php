@@ -17,24 +17,24 @@
         <div class="container">
             <div class="row mt-5">
                 <div class="col d-flex justify-content-end">
-                    <div class="card" style="width: 20rem;">
+                    <div class="card text-white bg-dark mb-3 position-absolute top-50 start-50 translate-middle" style="max-width: 21rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Datos del usuario</h5>
-                            <p class="card-text">ID: {{$users->id}}.</p>
-                            <p class="card-text">Correo electrónico: {{$users->Correo_electronico}}</p>
-                            <p class="card-text">Fecha de nacimiento: {{$users->Fecha_Nacimiento}}</p>
-                            <p class="card-text">País: {{$countries->Nombre}}</p>
-                            <p class="card-text">Rol: {{$roles->Nombre}}</p>
-                            <p class="card-text">Edad: {{$edad}}</p>
+                            <h5 class="card-title fw-bold position-absolute top-0 start-50 translate-middle-x">Datos del usuario</h5>
+                            <br>
+                            <p class="card-text "><strong>ID: </strong>{{$users->id}}</p>
+                            <p class="card-text"><strong>Correo electrónico: </strong>{{$users->Correo_electronico}}</p>
+                            <p class="card-text"><strong>Fecha de nacimiento: </strong>{{$users->Fecha_Nacimiento}}</p>
+                            <p class="card-text"><strong>País: </strong>{{$countries->Nombre}}</p>
+                            <p class="card-text"><strong>Rol: </strong>{{$roles->Nombre}}</p>
+                            <p class="card-text"><strong>Edad: </strong>{{$edad}}</p>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
-    @include('includes.footer')
-
+    @include('includes.footerFinal')
 </body>
 
 </html>

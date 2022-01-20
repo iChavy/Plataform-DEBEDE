@@ -16,31 +16,35 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-3">Ingresar</h4>
-                    <form action="" method='POST'>
-                        <div class="mb-3">
-                            <label for="Correo_electronico" class="form-label">Correo electrónico</label>
-                            <input type="text" placeholder="email@example.com" class="form-control @error('Correo_electronico') is-invalid @enderror" id="email" name="email" value="">
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="Contrasenya" class="form-label">Contraseña</label>
-                            <input type="text" placeholder="Debe tener entre 6 y 20 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="Contrasenya" name="Contrasenya" value="">
-                            @error('Contrasenya')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    
+                    <div class="position-absolute top-50 start-50 translate-middle " style="width: 30rem;">
+                        <h4 class="mb-3 text-center">Ingresar</h4>
+                        <form action="" method='POST'>
+                            <div class="mb-3">
+                                <label for="Correo_electronico" class="form-label">Correo electrónico</label>
+                                <input type="text" placeholder="email@example.com" class="form-control @error('Correo_electronico') is-invalid @enderror" id="email" name="email" value="">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="Contrasenya" class="form-label">Contraseña</label>
+                                <input type="text" placeholder="Debe tener entre 6 y 20 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="Contrasenya" name="Contrasenya" value="">
+                                @error('Contrasenya')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-dark">Enviar</button>
+                            </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+
                 </form>
             </div>
         </div>
         </div>
     </section>
-    @include('includes.footer')
+    @include('includes.footerFinal')
 </body>
 
 </html>

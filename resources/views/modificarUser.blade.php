@@ -16,33 +16,34 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-3">Modificar usuario</h4>
-                    <form action="" method='POST'>
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="Contrasenya" class="form-label">Contraseña</label>
-                            <input type="text" placeholder="Debe tener entre 6 y 20 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="Contrasenya" name="Contrasenya" value="" placeholder="{{$user->Contrasenya}}">
-                            @error('Contrasenya')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                        <label for="ID_Pais" class="form-label">País</label>
-                        <select class="form-select mb-4" aria-label="Seleccione un país:" name="ID_Pais" id="ID_Pais">
-                            @foreach ($countries as $country)
-                                <option value="{{$country->id}}">{{$country->Nombre}}</option>
-                            @endforeach
-                        </select>
-                        </div>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button type="submit" class="btn btn-primary mb-5">Realizar cambios</button>
-                        </div>
-                        
+                    <div class="position-absolute top-50 start-50 translate-middle " style="width: 30rem;">
+                        <h4 class="mb-3 text-center">Modificar usuario</h4>
+                        <form action="" method='POST'>
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="Contrasenya" class="form-label">Contraseña</label>
+                                <input type="text" placeholder="Debe tener entre 6 y 20 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="Contrasenya" name="Contrasenya" value="" placeholder="{{$user->Contrasenya}}">
+                                @error('Contrasenya')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="ID_Pais" class="form-label">País</label>
+                                <select class="form-select mb-4" aria-label="Seleccione un país:" name="ID_Pais" id="ID_Pais">
+                                    @foreach ($countries as $country)
+                                    <option value="{{$country->id}}">{{$country->Nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-dark mb-5">Realizar cambios</button>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    @include('includes.footer')
+    @include('includes.footerFinal')
 </body>
 
 </html>

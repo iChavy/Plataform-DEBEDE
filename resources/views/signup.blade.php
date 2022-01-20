@@ -16,7 +16,8 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-3">Registrarse</h4>
+                <div class="position-absolute top-50 start-50 translate-middle " style="width: 30rem;">
+                    <h4 class="mb-3 text-center ">Registro</h4>
                     <form action="{{action('UserController@store')}}" method='POST'>
                         <div class="mb-3">
                             <label for="Correo_electronico" class="form-label">Correo electrónico</label>
@@ -47,14 +48,18 @@
                             @endforeach
                         </select>
                         </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                        </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                
                 </form>
             </div>
         </div>
         </div>
     </section>
-    @include('includes.footer')
+    @include('includes.footerFinal')
 </body>
 
 </html>

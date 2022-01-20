@@ -42,7 +42,7 @@
         </div>
         </div>
     </section>
-    @include('includes.footer')
+    @include('includes.footerFinal')
 </body>
 
 </html>
