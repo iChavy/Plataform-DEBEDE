@@ -129,11 +129,15 @@ class UserController extends Controller
         $users = User::find($id);
         $countries = Country::find($users->ID_Pais);
         $roles = Role::find($users->ID_Rol);
+        $born = date('Y', strtotime($users->Fecha_Nacimiento));
+        $fecha = date('Y');
+
+        $edad = $fecha - $born;
         if (empty($users)) {
             return response()->json(['mensaje' => 'El ID ingresado no existe']);
         }
 
-        return view('home', compact('users', 'countries', 'roles'));
+        return view('home', compact('users', 'countries', 'roles', 'edad'));
     }
 
     /**

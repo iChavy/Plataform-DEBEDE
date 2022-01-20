@@ -186,6 +186,7 @@ class GameController extends Controller
      */
     public function store(Request $request, $id) //request, id_user
     {
+        $agerestrictions = AgeRestriction::where('borrado', false)->get();
         $validator = Validator::make(
             $request->all(),
             [
@@ -255,7 +256,7 @@ class GameController extends Controller
         $newGame->Descripcion = $request->Descripcion;
         $newGame->save();
 
-        return view('/crearJuego');
+        return view('/crearJuego', compact('agerestrictions'));
     }
 
     /**

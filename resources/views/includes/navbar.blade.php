@@ -64,7 +64,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
+                        <a class="nav-link" href="/crearJuego">Crear Juego</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/user/edit/{{$_COOKIE['id']}}">Modificar usuario</a>
@@ -94,7 +94,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/game/crearJuego/{{$_COOKIE['id']}}">Crear Juego</a>
+                    <a class="nav-link" href="/crearJuego">Crear Juego</a>
                 </li>
 
                 <li class="nav-item">

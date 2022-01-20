@@ -23,8 +23,9 @@
                             <p class="card-text">ID: {{$users->id}}.</p>
                             <p class="card-text">Correo electrónico: {{$users->Correo_electronico}}</p>
                             <p class="card-text">Fecha de nacimiento: {{$users->Fecha_Nacimiento}}</p>
-                            <p class="card-text">ID País: {{$countries->Nombre}}</p>
-                            <p class="card-text">ID Rol: {{$roles->Nombre}}</p>
+                            <p class="card-text">País: {{$countries->Nombre}}</p>
+                            <p class="card-text">Rol: {{$roles->Nombre}}</p>
+                            <p class="card-text">Edad: {{$edad}}</p>
                         </div>
                     </div>
                 </div>

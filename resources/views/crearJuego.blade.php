@@ -18,7 +18,7 @@
                 <div class="col">
 
                     <h4 class="mb-3">Crea un Juego</h4>
-                    <form action="{{action('GameController@store')}}" method='POST'>
+                    <form action="/game/crearJuego/{{$_COOKIE['id']}}" method='POST'>
 
                         <div class="mb-3">
                         <label for="ID_Restriccion" class="form-label">Restricción de edad</label>
@@ -28,8 +28,6 @@
                             @endforeach
                         </select>
                         </div>
-
-                        <!-- USUARIO CONECTADO DESARROLLADOR -->
                         
                         <div class="mb-3">
                             <label for="Nombre" class="form-label">Nombre del juego</label>
@@ -38,6 +36,14 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="Descripcion" class="form-label">Descripcion del juego</label>
+                            <input type="text" placeholder="Ingrese la descripción del juego" class="form-control @error('Descripcion') is-invalid @enderror" id="name" name="Descripcion" value="">
+                            @error('Descripcion')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>           
 
                         <div class="mb-3">
                             <label for="Precio" class="form-label">Ingrese el valor del juego</label>
@@ -59,6 +65,14 @@
                             <label for="Link_Demo" class="form-label">Link demo del juego</label>
                             <input type="date_format" placeholder="Ingrese el link demo del juego" class="form-control @error('Link_Demo') is-invalid @enderror" id="name" name="Link_Demo" value="">
                             @error('Link_Demo')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label">Imagen del juego</label>
+                            <input type="url" placeholder="Ingrese el link de la imagen" class="form-control @error('imagen') is-invalid @enderror" id="name" name="imagen" value="">
+                            @error('imagen')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
