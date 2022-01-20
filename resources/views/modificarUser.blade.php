@@ -43,7 +43,7 @@
             </div>
         </div>
     </section>
-    @include('includes.footerFinal')
+    @include('includes.footer')
 </body>
 
 </html>

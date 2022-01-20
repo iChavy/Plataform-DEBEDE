@@ -19,15 +19,15 @@
             <div class="row text-center mb-4">
                 @foreach ($resultados as $resultado)
                 <div class="col-4 d-flex justify-content-center my-3">
-                    
+
                     <div class="card" style="width: 18rem;">
-                    <img src="{{$resultado->imagen}}" class="card-img-top" alt="Imagen de curso">
+                        <img src="{{$resultado->imagen}}" class="card-img-top" alt="Imagen de curso">
                         <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <p class="list-group-item"><strong>ID de juego:</strong> {{$resultado->Codigo_Juego}}</p>
-                            <p class="list-group-item"><strong>Nombre:</strong> {{$resultado->Nombre}}</p>
-                            <p class="list-group-item"><strong>Descripción: </strong>{{$resultado->Descripcion}}</p>
-                            <a href="{{$resultado->Link}}" class="btn btn-dark"><strong>Jugar </strong></a>
+                            <ul class="list-group list-group-flush">
+                                <p class="list-group-item"><strong>ID de juego:</strong> {{$resultado->Codigo_Juego}}</p>
+                                <p class="list-group-item"><strong>Nombre:</strong> {{$resultado->Nombre}}</p>
+                                <p class="list-group-item"><strong>Descripción: </strong>{{$resultado->Descripcion}}</p>
+                                <a href="{{$resultado->Link}}" class="btn btn-dark"><strong>Jugar </strong></a>
                             </ul>
                         </div>
                     </div>
@@ -36,6 +36,8 @@
             </div>
         </div>
     </section>
+
+
     @include('includes.footer')
 </body>
 
