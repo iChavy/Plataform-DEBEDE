@@ -156,7 +156,7 @@ class GameController extends Controller
     public function indexBiblioteca($id)
     {
         $resultados = Game::join("libraries", "libraries.Codigo_Juego", "=", "games.id")
-            ->select("libraries.Codigo_Juego", "games.Nombre", "libraries.ID_Usuario", "games.Descripcion", "games.imagen")->where('libraries.ID_Usuario', $id)
+            ->select("libraries.Codigo_Juego", "games.Nombre", "libraries.ID_Usuario", "games.Descripcion", "games.imagen", "games.Link")->where('libraries.ID_Usuario', $id)
             ->get();
 
         return view('biblioteca', compact('resultados'));

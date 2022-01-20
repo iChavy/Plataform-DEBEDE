@@ -20,14 +20,18 @@
             Filtrar por título:
             <form class="d-flex">
                 <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Ingrese un título" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Filtrar</button>
+                <div class="pull-left" style="margin-right:5px">
+                <button class="btn btn-dark" type="submit">Filtrar</button>
+                </div>
             </form>
             <br>
             Filtrar por rango de precio:
             <form class="d-flex">
                 <input name="buscarPmin" class="form-control mr-sm-2" type="search" placeholder="Ingrese precio minimo" aria-label="Search">
                 <input name="buscarPmax" class="form-control mr-sm-2" type="search" placeholder="Ingrese precio maximo" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Filtrar</button>
+                <div class="pull-left" style="margin-right:5px">
+                <button class="btn btn-dark" type="submit">Filtrar</button>
+                </div>
             </form>
             <br>
 
@@ -40,7 +44,9 @@
                     @endforeach
 
                 </select>
-                <button class="btn btn-primary" type="submit">Filtrar</button>
+                <div class="pull-left" style="margin-right:5px">
+                <button class="btn btn-dark" type="submit">Filtrar</button>
+                </div>
             </form>
             <br>
 
@@ -53,13 +59,15 @@
                     @endforeach
 
                 </select>
-                <button class="btn btn-primary" type="submit">Filtrar</button>
+                <div class="pull-left" style="margin-right:5px">
+                <button class="btn btn-dark" type="submit">Filtrar</button>
+                </div>
             </form>
 
             <br>
         </div>
     </ul>
-
+    <hr />
     <section class="mt-5">
         <div class="container ">
             <h4 class="mb-5">Ranking de juegos más comprados:</h4>
@@ -69,13 +77,15 @@
                     <div class="card" style="width: 18rem;">
                         <img src="{{$game->imagen}}" class="card-img-top" alt="Imagen de curso">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre: {{$game->Nombre}}</h5>
-                            <p class="card-text">Descripción: {{$game->Descripcion}}</p>
-                            <p class="card-text">Precio: ${{$game->Precio}}</p>
-                            <p class="card-text">Número de ventas: {{$game->Numero_Ventas}}</p>
-                            <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-primary">Comprar</a>
-                            <a href="/game/vistaJuegoAd/{{ $game->id }}" class="btn btn-primary">Editar</a>
-                            <a href="/game/vistaEliminar/{{ $game->id }}" class="btn btn-primary">Borrar</a>
+                            <h5 class="card-title">{{$game->Nombre}}</h5>
+                            <ul class="list-group list-group-flush">
+                            <p class="list-group-item"><strong>Descripción: </strong>{{$game->Descripcion}}</p>
+                            <p class="list-group-item"><strong>Precio: </strong>${{$game->Precio}}</p>
+                            <p class="list-group-item"><strong>Número de ventas: </strong>{{$game->Numero_Ventas}}</p>
+                            </ul>
+                            <a href="/game/vistacarro/{{ $game->id }}" class="btn btn-dark">Comprar</a>
+                            <a href="/game/vistaJuegoAd/{{ $game->id }}" class="btn btn-secondary">Editar</a>
+                            <a href="/game/vistaEliminar/{{ $game->id }}" class="btn btn-danger">Borrar</a>
                         </div>
                     </div>
                 </div>

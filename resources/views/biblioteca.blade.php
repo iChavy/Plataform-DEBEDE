@@ -23,9 +23,12 @@
                     <div class="card" style="width: 18rem;">
                     <img src="{{$resultado->imagen}}" class="card-img-top" alt="Imagen de curso">
                         <div class="card-body">
-                            <p class="card-text">ID de juego: {{$resultado->Codigo_Juego}}</p>
-                            <p class="card-text">Nombre: {{$resultado->Nombre}}</p>
-                            <p class="card-text">Descripción: {{$resultado->Descripcion}}</p>
+                        <ul class="list-group list-group-flush">
+                            <p class="list-group-item"><strong>ID de juego:</strong> {{$resultado->Codigo_Juego}}</p>
+                            <p class="list-group-item"><strong>Nombre:</strong> {{$resultado->Nombre}}</p>
+                            <p class="list-group-item"><strong>Descripción: </strong>{{$resultado->Descripcion}}</p>
+                            <a href="{{$resultado->Link}}" class="btn btn-dark"><strong>Jugar </strong></a>
+                            </ul>
                         </div>
                     </div>
                 </div>
