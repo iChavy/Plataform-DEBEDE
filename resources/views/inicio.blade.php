@@ -80,7 +80,7 @@
                 @foreach ($games as $game)
                 <div class="col-4 d-flex justify-content-center my-3">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{$game->imagen}}" class="card-img-top" alt="Imagen de curso">
+                        <img src="{{$game->imagen}}" class="card-img-top" alt="Imagen de juego">
                         <div class="card-body">
                             <h5 class="card-title">{{$game->Nombre}}</h5>
                             <ul class="list-group list-group-flush">

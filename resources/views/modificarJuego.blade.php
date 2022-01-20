@@ -16,48 +16,49 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-3">Modificar Juego</h4>
-                    <form action="" method='POST'>
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="Nombre" class="form-label">Nombre del juego:</label>
-                            <input type="text" class="form-control @error('Nombre') is-invalid @enderror" id="Contrasenya" name="Nombre" value="">
-                            @error('Nombre')Nombre
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    <div class="position-absolute top-50 start-50 translate-middle " style="width: 30rem;">
+                        <h4 class="mb-3 text-center">Modificar Juego</h4>
+                        <form action="" method='POST'>
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="Nombre" class="form-label">Nombre del juego:</label>
+                                <input type="text" class="form-control @error('Nombre') is-invalid @enderror" id="Contrasenya" name="Nombre" value="">
+                                @error('Nombre')Nombre
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="Precio" class="form-label">Precio:</label>
-                            <input type="integer" class="form-control @error('Precio') is-invalid @enderror" id="name" name="Precio" value="">
-                            @error('Precio')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            <div class="mb-3">
+                                <label for="Precio" class="form-label">Precio:</label>
+                                <input type="integer" class="form-control @error('Precio') is-invalid @enderror" id="name" name="Precio" value="">
+                                @error('Precio')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="Descripcion" class="form-label">Descripción:</label>
-                            <input type="text" class="form-control @error('Descripcion') is-invalid @enderror" id="name" name="Descripcion" value="">
-                            @error('Descripcion')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            <div class="mb-3">
+                                <label for="Descripcion" class="form-label">Descripción:</label>
+                                <input type="text" class="form-control @error('Descripcion') is-invalid @enderror" id="name" name="Descripcion" value="">
+                                @error('Descripcion')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="ID_Restriccion" class="form-label">Restricción de edad</label>
-                            <select class="form-select mb-4" aria-label="Seleccione un tipo de restricción de edad:" name="ID_Restriccion" id="ID_Restriccion">
-                                @foreach ($agerestrictions as $agerestriction)
-                                <option value="{{$agerestriction->id}}">{{$agerestriction->Tipo_restriccion}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            <div class="mb-3">
+                                <label for="ID_Restriccion" class="form-label">Restricción de edad</label>
+                                <select class="form-select mb-4" aria-label="Seleccione un tipo de restricción de edad:" name="ID_Restriccion" id="ID_Restriccion">
+                                    @foreach ($agerestrictions as $agerestriction)
+                                    <option value="{{$agerestriction->id}}">{{$agerestriction->Tipo_restriccion}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button type="submit" class="btn btn-primary mb-5">Realizar cambios</button>
-                        </div>
-                        
-                    </form>
-                    
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-dark mb-5">Realizar cambios</button>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
