@@ -18,12 +18,21 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id) //poner param edad $
     {
         if ($request) {
+            // Calcula edad de usuario
+            $users = User::find($id);
+            $born = date('Y', strtotime($users->Fecha_Nacimiento));
+            $fecha = date('Y');
+            $edad = $fecha - $born;
+
+
             $agerestrictions = AgeRestriction::where('borrado', false)->get();
             $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
-            $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
+            $games = Game::join("age_restrictions", "age_restrictions.id", "=", "games.ID_Restriccion")
+                ->select("games.id", "games.Nombre", "games.Precio", "games.Link", "games.Link_Demo", "games.imagen", "games.Descripcion", "games.ID_Usuario", "games.ID_Restriccion", "games.Numero_Ventas", "age_restrictions.Edad")
+                ->where('Edad', '<', $edad)->where('games.borrado', false)->where('age_restrictions.borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
             if ($request) {
                 $Nombre = $request->get('buscarpor');
                 $Categoria = $request->get('buscarC');
@@ -32,22 +41,34 @@ class GameController extends Controller
                 $PrecioMax = $request->get('buscarPmax');
 
                 if ($Categoria) {
-                    $games = Game::where('ID_Restriccion', 'like', "%$Categoria%")->where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
+                    $games = Game::join("age_restrictions", "age_restrictions.id", "=", "games.ID_Restriccion")
+                        ->select("games.id", "games.Nombre", "games.Precio", "games.Link", "games.Link_Demo", "games.imagen", "games.Descripcion", "games.ID_Usuario", "games.ID_Restriccion", "games.Numero_Ventas", "age_restrictions.Edad")
+                        ->where('Edad', '<', $edad)->where('ID_Restriccion', 'like', "%$Categoria%")->where('games.borrado', false)->where('age_restrictions.borrado', false)
+                        ->orderBy('Numero_Ventas', 'desc')->get();
                     return view('juegos', ['games' => $games, 'buscarC' => $Categoria], compact('agerestrictions', 'users'));
                 }
 
                 if ($Nombre) {
-                    $games = Game::where('Nombre', 'like', "%$Nombre%")->where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
+                    $games = Game::join("age_restrictions", "age_restrictions.id", "=", "games.ID_Restriccion")
+                        ->select("games.id", "games.Nombre", "games.Precio", "games.Link", "games.Link_Demo", "games.imagen", "games.Descripcion", "games.ID_Usuario", "games.ID_Restriccion", "games.Numero_Ventas", "age_restrictions.Edad")
+                        ->where('Edad', '<', $edad)->where('games.borrado', false)->where('age_restrictions.borrado', false)->where('Nombre', 'like', "%$Nombre%")
+                        ->orderBy('Numero_Ventas', 'desc')->get();
                     return view('juegos', ['games' => $games, 'buscarpor' => $Nombre], compact('agerestrictions', 'users'));
                 }
 
                 if ($Desarrollador) {
-                    $games = Game::where('ID_Usuario', 'like', "%$Desarrollador%")->where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
+                    $games = Game::join("age_restrictions", "age_restrictions.id", "=", "games.ID_Restriccion")
+                        ->select("games.id", "games.Nombre", "games.Precio", "games.Link", "games.Link_Demo", "games.imagen", "games.Descripcion", "games.ID_Usuario", "games.ID_Restriccion", "games.Numero_Ventas", "age_restrictions.Edad")
+                        ->where('Edad', '<', $edad)->where('games.borrado', false)->where('age_restrictions.borrado', false)->where('ID_Usuario', 'like', "%$Desarrollador%")
+                        ->orderBy('Numero_Ventas', 'desc')->get();
                     return view('juegos', ['games' => $games, 'buscarD' => $Desarrollador], compact('agerestrictions', 'users'));
                 }
 
                 if ($PrecioMin and $PrecioMax) {
-                    $games = Game::where('Precio', '>', "$PrecioMin")->where('Precio', '<', "$PrecioMax")->where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
+                    $games = Game::join("age_restrictions", "age_restrictions.id", "=", "games.ID_Restriccion")
+                        ->select("games.id", "games.Nombre", "games.Precio", "games.Link", "games.Link_Demo", "games.imagen", "games.Descripcion", "games.ID_Usuario", "games.ID_Restriccion", "games.Numero_Ventas", "age_restrictions.Edad")
+                        ->where('Edad', '<', $edad)->where('games.borrado', false)->where('age_restrictions.borrado', false)->where('Precio', '>', "$PrecioMin")->where('Precio', '<', "$PrecioMax")
+                        ->orderBy('Numero_Ventas', 'desc')->get();
                     return view('juegos', ['games' => $games, 'buscarPmin' => $PrecioMin, 'buscarPmax' => $PrecioMax], compact('agerestrictions', 'users'));
                 }
             }
@@ -58,6 +79,7 @@ class GameController extends Controller
 
     public function indexInicio(Request $request)
     {
+
         if ($request) {
             $agerestrictions = AgeRestriction::where('borrado', false)->get();
             $users = User::where('borrado', false)->where('ID_Rol', 2)->get();

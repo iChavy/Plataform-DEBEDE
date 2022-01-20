@@ -27,7 +27,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Contrasenya" class="form-label">Contraseña</label>
-                            <input type="text" placeholder="Debe tener entre 6 y 8 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="name" name="Contrasenya" value="">
+                            <input type="text" placeholder="Debe tener entre 6 y 20 caracteres" class="form-control @error('Contrasenya') is-invalid @enderror" id="name" name="Contrasenya" value="">
                             @error('Contrasenya')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

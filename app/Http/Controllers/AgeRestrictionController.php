@@ -57,12 +57,18 @@ class AgeRestrictionController extends Controller
             $request->all(),
             [
                 'Tipo_restriccion' => 'required|min:3|max:40|unique:age_restrictions',
+                'Edad' => 'required|integer|min:0|max:17',
             ],
             [
                 'Tipo_restriccion.unique' => 'El tipo de restricción ya existe',
                 'Tipo_restriccion.required' => 'Se debe ingresar la restriccion de edad',
                 'Tipo_restriccion.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_restriccion.max' => 'Debe ser de largo máximo :max',
+
+                'Edad.required' => 'Se debe ingresar la edad de la restricción',
+                'Edad.integer' => 'Debe ser un entero',
+                'Edad.min' => 'Edad mínima $ :min',
+                'Edad.max' => 'Edad máxima $ :max',
             ]
         );
         //Caso falla la validación
@@ -72,6 +78,7 @@ class AgeRestrictionController extends Controller
 
         $newAgeRestriction = new AgeRestriction();
         $newAgeRestriction->Tipo_restriccion = $request->Tipo_restriccion;
+        $newAgeRestriction->Edad = $request->Edad;
         $newAgeRestriction->borrado = false;
         $newAgeRestriction->save();
 
@@ -121,13 +128,16 @@ class AgeRestrictionController extends Controller
         $validator = Validator::make(
             $request->only(['Tipo_restriccion']),
             [
-                'Tipo_restriccion' => 'required|min:3|max:40|unique:age_restrictions',
+                'Tipo_restriccion' => 'nullable|min:3|max:40|unique:age_restrictions',
+                'Edad' => 'nullable|integer|min:0|max:17',
             ],
             [
                 'Tipo_restriccion.unique' => 'El tipo de restricción ya existe',
-                'Tipo_restriccion.required' => 'Se debe ingresar la restriccion de edad',
                 'Tipo_restriccion.min' => 'Debe ser de largo mínimo :min',
                 'Tipo_restriccion.max' => 'Debe ser de largo máximo :max',
+                'Edad.integer' => 'Debe ser un entero',
+                'Edad.min' => 'Edad mínima $ :min',
+                'Edad.max' => 'Edad máxima $ :max',
             ]
         );
         //Caso falla la validación
@@ -147,6 +157,7 @@ class AgeRestrictionController extends Controller
         }
 
         $agerestriction->Tipo_restriccion = $request->Tipo_restriccion;
+        $agerestriction->Edad = $request->Edad;
         $agerestriction->save();
         return response()->json([
             'mensaje' => 'La restriccion de edad ha sido actualizada',

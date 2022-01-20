@@ -27,7 +27,7 @@
                 @if(($_COOKIE['rol']) == 1)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/juegos">Juegos</a>
+                        <a class="nav-link" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
                     </li>
 
                     <li class="nav-item">
@@ -56,7 +56,7 @@
                 @elseif(($_COOKIE['rol']) == 2)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/juegos">Juegos</a>
+                        <a class="nav-link" href="/juegos/{{$_COOKIE['id']}}">Juegos</a>
                     </li>
 
                     <li class="nav-item">

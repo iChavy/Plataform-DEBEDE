@@ -42,8 +42,7 @@ Route::get('/juegos', function () {
 Route::get('/crearJuego', function () {
     return view('crearJuego');
 });
-Route::get('/juegos', 'GameController@index'); 
-Route::get('/juegos', 'GameController@index');  //filtro nombre, ranking y no borrados
+Route::get('/juegos/{id}', 'GameController@index');  //filtro nombre, ranking y no borrados, con filtro de edad
 //Route::get('/juegos', 'AgeRestrictionController@index'); 
 
 Route::get('/inicio', 'GameController@indexInicio'); 

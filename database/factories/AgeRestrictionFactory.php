@@ -23,7 +23,8 @@ class AgeRestrictionFactory extends Factory
     {
         return [
             'Tipo_restriccion' => $this->faker->unique()->text($maxNbChars = 40),
-            'borrado' => $this->faker->boolean
+            'borrado' => $this->faker->boolean,
+            'Edad' => $this->faker->numberBetween($min = 0, $max = 17)
         ];
     }
 }
