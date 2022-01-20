@@ -191,17 +191,7 @@ class UserController extends Controller
             return response()->json(['mensaje' => 'No se encuentra el id ingresado']);
         }
 
-        if (($request->Correo_electronico == $user->Correo_electronico) |
-            ($request->Contrasenya == $user->Contrasenya) |
-            ($request->Fecha_Nacimiento == $user->Fecha_Nacimiento) |
-            ($request->Saldo_Moneda == $user->Saldo_Moneda) |
-            ($request->ID_Rol == $user->ID_Rol) |
-            ($request->ID_Pais == $user->ID_Pais)
-        ) {
-            return response()->json([
-                "message" => "Los datos ingresados son iguales a los actuales."
-            ], 404);
-        }
+        
         if (!empty($request->Correo_electronico)) {
             $user->Correo_electronico = $request->Correo_electronico;
         }
@@ -228,7 +218,7 @@ class UserController extends Controller
         ], 200);
         */
         $users = User::all();
-        return (redirect()->to('/juegos'));
+        return (redirect()->to('/cambios'));
     }
 
     public function borrado($id)

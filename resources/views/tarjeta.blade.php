@@ -17,26 +17,32 @@
             <div class="row">
                 <div class="col">
                     <h4 class="mb-3"></h4>
-                    <form action="{{action('PaymentMethodController@store')}}" method='POST'>
-                        <div class="mb-3">
-                            <label for="Nombre" class="form-label">Nombre de la tarjeta</label>
-                            <select class="form-select mb-4" aria-label="Seleccione el tipo de tarjeta:" name="Nombre" id="Nombre">
-                                @foreach ($paymentmethods as $paymentmethod)
-                                <option value="{{$paymentmethod->id}}">{{$paymentmethod->Nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="position-absolute top-50 start-50 translate-middle " style="width: 30rem;">
 
-                        <div class="mb-3">
-                            <label for="Nro_tarjeta" class="form-label">Número de la tarjeta</label>
-                            <input type="text" placeholder="123456789" class="form-control @error('Nro_tarjeta') is-invalid @enderror" id="nro" name="nro" value="">
-                            @error('nro')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <form action="{{action('PaymentMethodController@store')}}" method='POST'>
+                            <div class="mb-3">
+                                <label for="Nombre" class="form-label">Nombre de la tarjeta</label>
+                                <select class="form-select mb-4" aria-label="Seleccione el tipo de tarjeta:" name="Nombre" id="Nombre">
+                                    @foreach ($paymentmethods as $paymentmethod)
+                                    <option value="{{$paymentmethod->id}}">{{$paymentmethod->Nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Nro_tarjeta" class="form-label">Número de la tarjeta</label>
+                                <input type="text" placeholder="123456789" class="form-control @error('Nro_tarjeta') is-invalid @enderror" id="nro" name="nro" value="">
+                                @error('nro')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <a href="/tarjeta" class="btn btn-dark">Comprar</a>
+                            </div>
+                    </div>
                 </div>
                 <!--<button type="submit" class="btn btn-primary">Enviar</button>-->
-                <a href="/tarjeta" class="btn btn-primary">no hace nada</a>
+
                 </form>
             </div>
         </div>

@@ -278,7 +278,7 @@ class GameController extends Controller
         $newGame->Descripcion = $request->Descripcion;
         $newGame->save();
 
-        return view('/crearJuego', compact('agerestrictions'));
+        return view('/crear', compact('agerestrictions'));
     }
 
     /**
@@ -398,7 +398,7 @@ class GameController extends Controller
         $agerestrictions = AgeRestriction::where('borrado', false)->get();
         $users = User::where('borrado', false)->where('ID_Rol', 2)->get();
         $games = Game::where('borrado', false)->orderBy('Numero_Ventas', 'desc')->get();
-        return view('/juegosAdmin', compact('users', 'agerestrictions', 'games'));
+        return view('/cambios', compact('users', 'agerestrictions', 'games'));
         /*
         return response()->json([
             'msg' => 'El juego ha sido modificado.',

@@ -86,8 +86,14 @@ Route::get('/tarjeta', 'PaymentMethodController@index');
 Route::get('/modificarJuego', 'GameController@edit');
 Route::put('/modificarJuego', 'GameController@update');
 
-//CrearJuego
-
+//Mensaje modificar
+Route::get('/cambios', function () {
+    return view('cambios');
+});
+//Mensaje creación
+Route::get('/crear', function () {
+    return view('crear');
+});
 
 // Bank
 Route::get('/banks', 'BankController@index');

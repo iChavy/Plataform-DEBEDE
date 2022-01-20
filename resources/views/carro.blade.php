@@ -26,8 +26,8 @@
                             <samp>Precio: ${{$games->Precio}}</samp>
                         </fieldset>
                         <br>
-                        <a href="/tarjeta" class="btn btn-primary ">Pagar con tarjeta</a>
-                        <a href="/moneda" class="btn btn-primary">Pagar con moneda</a>
+                        <a href="/tarjeta" class="btn btn-dark ">Pagar con tarjeta</a>
+                        <a href="/moneda" class="btn btn-dark">Pagar con moneda</a>
                     </form>
                 </div>
                 </div>
