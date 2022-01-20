@@ -106,7 +106,7 @@ class UserController extends Controller
             'id' => $newUser->id,
             
         ], 201);*/
-        return view('inicio', compact('agerestrictions', 'users', 'games'));
+        return view('crear', compact('agerestrictions', 'users', 'games'));
     }
 
     /**
